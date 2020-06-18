@@ -1,0 +1,153 @@
+# depslib dependency file v1.0
+1543541765 source:e:\level_three\compilation_projects\ddl_12_03\c0_complier\lexical_analysis.cpp
+	<stdio.h>
+	<iostream>
+	<string.h>
+	"Lexical.h"
+	<fstream>
+	<stdlib.h>
+
+1543742054 
+
+1543495017 e:\level_three\compilation_projects\ddl_12_03\c0_complier\lexical.h
+	<stdio.h>
+	"Lexical_func.h"
+	<fstream>
+
+1543987935 e:\level_three\compilation_projects\ddl_12_03\c0_complier\lexical_func.h
+	<fstream>
+
+1544528429 source:e:\level_three\compilation_projects\ddl_12_03\c0_complier\main.cpp
+	<stdio.h>
+	"Lexical_func.h"
+	"Syntax_analysis.h"
+	"Global_variable.h"
+	"Translate_Mips.h"
+
+1543721992 _Mips.h"
+
+1543538967 e:\level_three\compilation_projects\ddl_12_03\c0_complier\syntax_analysis.h
+	"Lexical_func.h"
+	<stdio.h>
+	<fstream>
+
+1544772531 e:\level_three\compilation_projects\ddl_12_03\c0_complier\global_variable.h
+	"symbol_table.h"
+	<fstream>
+
+1543489882 e:\level_three\compilation_projects\ddl_12_03\c0_complier\symbol_table.h
+	"Lexical_func.h"
+	<string>
+
+1543486942 source:e:\level_three\compilation_projects\ddl_12_03\c0_complier\symbol_table.cpp
+	"symbol_table.h"
+	<stdlib.h>
+	<string.h>
+	<iostream>
+	"Syntax_analysis.h"
+
+1543488163 alysis.h"
+
+1544098106 source:e:\level_three\compilation_projects\ddl_12_03\c0_complier\syntax_analysis.cpp
+	"Syntax_analysis.h"
+	"symbol_table.h"
+	<stdlib.h>
+	<iostream>
+	<string.h>
+
+1543488163 source:e:\level_three\compilation_projects\ddl_12_03\c0_complier\syntax_error.cpp
+	"Syntax_analysis.h"
+
+1543920483 source:e:\level_three\compilation_projects\ddl_12_03\c0_complier\output_quaternary.cpp
+	"Syntax_analysis.h"
+	"symbol_table.h"
+	<iostream>
+	<string.h>
+
+1544772548 e:\level_three\compilation_projects\ddl_12_03\c0_complier\translate_mips.h
+	"Lexical_func.h"
+	<fstream>
+
+1544323015 source:e:\level_three\compilation_projects\ddl_12_03\c0_complier\translate_mips.cpp
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
+	"symbol_table.h"
+	"Syntax_analysis.h"
+	"Translate_Mips.h"
+	<iostream>
+	<string.h>
+
+1543541765 source:/media/beyond/B6B4649FB4646439/Level_Three/Compilation_Projects/DDL_12_03/C0_Complier/Lexical_analysis.cpp
+	<stdio.h>
+	<iostream>
+	<string.h>
+	"Lexical.h"
+	<fstream>
+	<stdlib.h>
+
+1543495017 /media/beyond/B6B4649FB4646439/Level_Three/Compilation_Projects/DDL_12_03/C0_Complier/Lexical.h
+	<stdio.h>
+	"Lexical_func.h"
+	<fstream>
+
+1543679763 /media/beyond/B6B4649FB4646439/Level_Three/Compilation_Projects/DDL_12_03/C0_Complier/Lexical_func.h
+	<fstream>
+
+1543721992 source:/media/beyond/B6B4649FB4646439/Level_Three/Compilation_Projects/DDL_12_03/C0_Complier/main.cpp
+	<stdio.h>
+	"Lexical_func.h"
+	"Syntax_analysis.h"
+	"Global_variable.h"
+	"Translate_Mips.h"
+
+1543538967 /media/beyond/B6B4649FB4646439/Level_Three/Compilation_Projects/DDL_12_03/C0_Complier/Syntax_analysis.h
+	"Lexical_func.h"
+	<stdio.h>
+	<fstream>
+
+1543742036 /media/beyond/B6B4649FB4646439/Level_Three/Compilation_Projects/DDL_12_03/C0_Complier/Global_variable.h
+	"symbol_table.h"
+	<fstream>
+
+1543489882 /media/beyond/B6B4649FB4646439/Level_Three/Compilation_Projects/DDL_12_03/C0_Complier/symbol_table.h
+	"Lexical_func.h"
+	<string>
+
+1543742054 /media/beyond/B6B4649FB4646439/Level_Three/Compilation_Projects/DDL_12_03/C0_Complier/Translate_Mips.h
+	"Lexical_func.h"
+	<fstream>
+
+1543547110 source:/media/beyond/B6B4649FB4646439/Level_Three/Compilation_Projects/DDL_12_03/C0_Complier/output_Quaternary.cpp
+	"Syntax_analysis.h"
+	"symbol_table.h"
+	<iostream>
+	<string.h>
+
+1543486942 source:/media/beyond/B6B4649FB4646439/Level_Three/Compilation_Projects/DDL_12_03/C0_Complier/symbol_table.cpp
+	"symbol_table.h"
+	<stdlib.h>
+	<string.h>
+	<iostream>
+	"Syntax_analysis.h"
+
+1543749175 source:/media/beyond/B6B4649FB4646439/Level_Three/Compilation_Projects/DDL_12_03/C0_Complier/Syntax_analysis.cpp
+	"Syntax_analysis.h"
+	"symbol_table.h"
+	<stdlib.h>
+	<iostream>
+	<string.h>
+
+1543488163 source:/media/beyond/B6B4649FB4646439/Level_Three/Compilation_Projects/DDL_12_03/C0_Complier/Syntax_Error.cpp
+	"Syntax_analysis.h"
+
+1543749816 source:/media/beyond/B6B4649FB4646439/Level_Three/Compilation_Projects/DDL_12_03/C0_Complier/Translate_Mips.cpp
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
+	"symbol_table.h"
+	"Syntax_analysis.h"
+	"Translate_Mips.h"
+	<iostream>
+	<string.h>
+

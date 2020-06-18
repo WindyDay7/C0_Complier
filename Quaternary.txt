@@ -1,0 +1,99 @@
+function1:
+para int parameter1
+t1 = parameter1 + 1
+return t1
+function_cal:
+cal_num1 = 0
+cal_flag = 0
+cal_result = 0
+i = 0
+Label0:
+i < 10
+BZ Label1
+scanf temp_in
+cal[i] = temp_in
+i = i + 1
+GOTO Label0
+Label1:
+i = 0
+Label2:
+i < 10
+BZ Label3
+cal_num1 = 0
+Label4:
+t2 = cal[i]
+temp_cal = t2
+temp_cal >= 48
+BZ Label5
+t3 = temp_cal - 48
+cal_num = t3
+t4 = 10 * cal_num1
+t5 = t4 + cal_num
+cal_num1 = t5
+t6 = i + 1
+i = t6
+Label5:
+temp_cal >= 48
+BNZ Label4
+t7 = cal_flag + 1
+cal_flag = t7
+cal_flag == 1
+BZ Label6
+t8 = cal_result + cal_num1
+cal_result = t8
+GOTO Label7
+Label6:
+temp_cal == str4
+BZ Label8
+t9 = cal_result + cal_num1
+cal_result = t9
+GOTO Label9
+Label8:
+t10 = cal_result + cal_num1
+cal_result = t10
+Label9:
+Label7:
+i = i + 1
+GOTO Label2
+Label3:
+return cal_result
+Complex_Compute:
+a = 1
+b = number1
+c = number2
+t11 = number2 - num
+d = t11
+t12 = b + c
+t13 = t12 - d
+e = t13
+t14 = c + a
+t15 = t14 - d
+f = t15
+printf string0
+printf string1
+printf string2
+printf string3
+printf string4
+printf string5
+printf string6
+x = 120
+y = 121
+printf string7
+t16 = number4[99]
+t17 = t16 * a
+call  function1;
+t18 = RET
+t19 = t18 * b
+t20 = t17 + t19
+result_1 = t20
+call  function_cal;
+t21 = RET
+result_2 = t21
+printf string8
+printf string9
+return t-1
+main:
+t22 = constant1 + constant2
+out_num = t22
+call  Complex_Compute;
+return t-1
