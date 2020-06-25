@@ -36,6 +36,8 @@
 		<Unit filename="Lexical.h" />
 		<Unit filename="Lexical_analysis.cpp" />
 		<Unit filename="Lexical_func.h" />
+		<Unit filename="New_Quadruple.cpp" />
+		<Unit filename="New_Quadruple.h" />
 		<Unit filename="Syntax_Error.cpp" />
 		<Unit filename="Syntax_analysis.cpp" />
 		<Unit filename="Syntax_analysis.h" />

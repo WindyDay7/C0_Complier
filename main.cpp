@@ -3,10 +3,13 @@
 #include "Syntax_analysis.h"
 #include "Global_variable.h"
 #include "Translate_Mips.h"
+#include "New_Quadruple.h"
 
 int main()
 {
-	fp = fopen("test2.txt", "r");
+    char File_Path[100]={0};
+    scanf("%s", File_Path);
+	fp = fopen(File_Path, "r");
 	initialize();
 	//next_symbol(fp);
 	symbol = next_symbol(fp);
@@ -16,7 +19,13 @@ int main()
 	Reserved = data_address;
 	// symbol = next_symbol(fp);
 	deal_function();		//处理函数的声明
-    output_Quaternary();
-    Translate();
+	if(!WITHER_WRONG)
+    {
+        Change_Quadruple();
+        Drop_Quadruple();
+        output_Quaternary();
+
+        Translate();
+    }
     fclose(fp);
 }

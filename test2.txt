@@ -1,86 +1,180 @@
-const int num = 33, number1 = 35, number2 = 36, number6 = 0;
-const char str = '1', str1 = 'a', str2 = 'e', str3 = '9', str4 = '+', str5 = '*';
-int i;
-int letter_only, number3, number4[100];
-char only_letter, str6, str7[200], cal[100], temp_cal;
+const int MAX_STACK_NUM =10, MAX_CHOOSE_NUM = 10;    
+const char DIVIDE = '_';
 
-int function1(int parameter1)
-{
-	return (parameter1 +1);
+int stack[12], used[12];    
+int n, m;
+int sum;
+
+int get_max_num_1()         
+{                            
+    return (MAX_STACK_NUM);    
 }
 
-int function_cal()
+int get_max_num_2()
 {
-	int i;
-	int cal_num1, cal_flag, cal_num3, cal_num, cal_result;
-	char temp_in;
-	cal_num1 = 0;
-	cal_flag = 0;
-	cal_result = 0;
-
-	for (i = 0; i < 10; i = i + 1) {
-		scanf(temp_in);
-		cal[i] = temp_in;
-	}
-	for (i = 0; i < 10; i = i + 1)
-	{
-		cal_num1 = 0;
-		do
-		{
-			temp_cal = cal[i];
-			if (temp_cal >= '0') {
-				cal_num = temp_cal - '0';
-				cal_num1 = 10 * cal_num1 + cal_num;
-				i = i + 1;
-			}
-		}
-		while (temp_cal >= '0')
-		cal_flag = cal_flag + 1;
-		if (cal_flag == 1)
-			cal_result = cal_result + cal_num1;
-		else
-		{
-			if (temp_cal == str4)
-				cal_result = cal_result + cal_num1;
-			else
-				cal_result = cal_result + cal_num1;
-		}
-	}
-	return (cal_result);
+    int max_num;
+    max_num = MAX_CHOOSE_NUM;
+    return (max_num);
 }
 
-void Complex_Compute()
+int get_2()
 {
-	int a, b, c, d, e, f, g;
-	int x, y;
-	int result_1, result_2, result_3, result_4;
-	a = +1; b = number1; c = number2; d = number2 - num;
-	e = b + c - d;
-	f = c + a - d;
-	printf("\n a is", a);
-	printf("\n b is", b);
-	printf("\n c is", c);
-	printf("\n d is", d);
-	printf("\n e is", e);
-	printf("\n f is", f);
-	printf("\n g is", g);
-	x = 'x';
-	y = 'y';
-	printf("\n");
-	result_1 = number4[99] * a + function1(5) * b;
-	result_2 = function_cal();
-	printf("\n");
-	printf("Calculate the result_2 is: ", result_2);
-	return ;
+    const int m = 2;
+    return (m);
 }
 
-void main()
+int compute(int a, int b, char op)    
 {
-	const int constant1 = 12, constant2 = 13;
-	const char constant3 = 'f', constant4 = 'w';
-	int in_num, out_num, i;
-	char in_str, out_str;
-	out_num = constant1 + constant2;
-	Complex_Compute();
-	return ;
+    if ((op) == ('+'))
+        return ((a + 2 * b) - b);
+    else
+    {
+        if ((op) == ('-'))
+            return (a - (b + b) / 2);
+        else
+        {
+            if ((op) == ('*'))
+                return (a * b);
+            else
+            {
+                if (b)
+                    return (a / b);
+                else
+                    return (((1+2)*3-4)/5*6 + -7 + 1);
+            }
+        }
+    }
+}
+
+void permutations(int a)    
+{                        
+    int i;            
+    i = 0;
+
+    if (a == m)
+    {
+    
+        if(i < m){
+        do{
+            printf(" ", stack[i]);
+            i = i + 1;
+        }while(i<m)
+        }
+
+        printf("___________");
+        return;
+    }
+
+    i=1;
+    do 
+    {
+        if (used[i] != 0)
+            ;
+        else
+        {
+            stack[a] = i;
+            used[i] = 1;
+            permutations(a + 1);
+            used[i] = 0;
+        }
+        i=i+1;
+    }while(i<=n)
+}
+
+
+
+char get_permutations_sy()   
+{
+    const char PERMUTATIONS_SY = 'T';    
+    return (PERMUTATIONS_SY);     
+}
+
+char judge(int n, int m)
+{
+    const char DIVIDE = '*';
+    printf(DIVIDE);
+    if (n >= get_max_num_1() + 1)
+        return ('F');
+    if (m > n)
+        return ('F');
+    if (m <= 0)
+        return ('F');
+    return ('T');
+}
+
+void preparation()  
+{                    
+    const int zero = 0;
+    int n;
+    int i;
+    int array[12];
+
+    n = compute(get_max_num_1(), 1, '+');
+
+    if(n)
+    {
+    do{
+        n = -1 + n;
+        used[n] = zero;
+        array[n] = 10086;
+    }while(n)
+    }
+    
+    n=compute(MAX_CHOOSE_NUM, get_2(), '+') - 1;
+    do
+    {
+        stack[n - 1] = array[n + (-6 / 4 + 2 * 3) * 4 - 21] - 10086;
+        n=n-1;
+    }while(n)
+
+    return;
+}
+
+void test_for()
+{
+    int i;
+
+    i=1;
+    do{
+        printf("test for success");
+        i=i+1;
+    }while(0)
+}
+
+int test_6_para(int a1,int a2,int a3,int a4,int a5,int a6)
+{
+    return (a1+a2+a3+a4+a5+a6);
+}
+
+void main()    
+{
+    int a, b;
+    char op;
+    char sy,nor_sy;
+
+    test_for();
+
+    
+    scanf(a, b, op);
+    n = compute(a, b, op);
+    printf(DIVIDE);
+    printf(n);
+    scanf(m);
+
+    sy = judge(n, m);
+    sum = test_6_para(a,b,n,m,1,2);
+    printf(sum);
+
+    printf("You can choose m numbers permutations from n numbers ? ", sy);
+    printf("___________");
+
+    nor_sy = get_permutations_sy();
+
+    if ((sy) != (nor_sy))
+        printf("error input: 0 < m <= n <= 10");
+    else
+    {
+        preparation();
+        permutations(0);
+    }
 }

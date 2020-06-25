@@ -17,7 +17,7 @@
 1543987935 e:\level_three\compilation_projects\ddl_12_03\c0_complier\lexical_func.h
 	<fstream>
 
-1544528429 source:e:\level_three\compilation_projects\ddl_12_03\c0_complier\main.cpp
+1544118049 source:e:\level_three\compilation_projects\ddl_12_03\c0_complier\main.cpp
 	<stdio.h>
 	"Lexical_func.h"
 	"Syntax_analysis.h"
@@ -31,7 +31,7 @@
 	<stdio.h>
 	<fstream>
 
-1544772531 e:\level_three\compilation_projects\ddl_12_03\c0_complier\global_variable.h
+1543742036 e:\level_three\compilation_projects\ddl_12_03\c0_complier\global_variable.h
 	"symbol_table.h"
 	<fstream>
 
@@ -64,7 +64,7 @@
 	<iostream>
 	<string.h>
 
-1544772548 e:\level_three\compilation_projects\ddl_12_03\c0_complier\translate_mips.h
+1543742054 e:\level_three\compilation_projects\ddl_12_03\c0_complier\translate_mips.h
 	"Lexical_func.h"
 	<fstream>
 
@@ -148,6 +148,339 @@
 	"symbol_table.h"
 	"Syntax_analysis.h"
 	"Translate_Mips.h"
+	<iostream>
+	<string.h>
+
+1544711588 source:e:\level_three\compilation_projects\ddl_12_09\c0_complier\lexical_analysis.cpp
+	<stdio.h>
+	<iostream>
+	<string.h>
+	"Lexical.h"
+	<fstream>
+	<stdlib.h>
+
+1543495017 e:\level_three\compilation_projects\ddl_12_09\c0_complier\lexical.h
+	<stdio.h>
+	"Lexical_func.h"
+	<fstream>
+
+1544772097 e:\level_three\compilation_projects\ddl_12_09\c0_complier\lexical_func.h
+	<fstream>
+
+1544850177 source:e:\level_three\compilation_projects\ddl_12_09\c0_complier\output_quaternary.cpp
+	"Syntax_analysis.h"
+	"symbol_table.h"
+	<iostream>
+	<string.h>
+
+1544778886 e:\level_three\compilation_projects\ddl_12_09\c0_complier\syntax_analysis.h
+	"Lexical_func.h"
+	<stdio.h>
+	<fstream>
+
+1544861923 e:\level_three\compilation_projects\ddl_12_09\c0_complier\symbol_table.h
+	"Lexical_func.h"
+	<string>
+
+1544790285 source:e:\level_three\compilation_projects\ddl_12_09\c0_complier\symbol_table.cpp
+	"symbol_table.h"
+	<stdlib.h>
+	<string.h>
+	<iostream>
+	"Syntax_analysis.h"
+
+1544793655 source:e:\level_three\compilation_projects\ddl_12_09\c0_complier\syntax_analysis.cpp
+	"Syntax_analysis.h"
+	"symbol_table.h"
+	<stdlib.h>
+	<iostream>
+	<string.h>
+
+1543488163 source:e:\level_three\compilation_projects\ddl_12_09\c0_complier\syntax_error.cpp
+	"Syntax_analysis.h"
+
+1544927981 source:e:\level_three\compilation_projects\ddl_12_09\c0_complier\translate_mips.cpp
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
+	"symbol_table.h"
+	"Syntax_analysis.h"
+	"Translate_Mips.h"
+	<iostream>
+	<string.h>
+
+1544850732 e:\level_three\compilation_projects\ddl_12_09\c0_complier\translate_mips.h
+	"Lexical_func.h"
+	<fstream>
+
+1544927930 source:e:\level_three\compilation_projects\ddl_12_09\c0_complier\main.cpp
+	<stdio.h>
+	"Lexical_func.h"
+	"Syntax_analysis.h"
+	"Global_variable.h"
+	"Translate_Mips.h"
+	"New_Quadruple.h"
+
+1544850706 e:\level_three\compilation_projects\ddl_12_09\c0_complier\global_variable.h
+	"symbol_table.h"
+	<fstream>
+
+1544793812 source:e:\level_three\compilation_projects\ddl_12_09\c0_complier\new_quadruple.cpp
+	<stdlib.h>
+	<stdio.h>
+	"symbol_table.h"
+	"Syntax_analysis.h"
+	"Translate_Mips.h"
+	"New_Quadruple.h"
+	<iostream>
+
+1544793288 e:\level_three\compilation_projects\ddl_12_09\c0_complier\new_quadruple.h
+
+1545356875 source:e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú“ª\c0_complier\lexical_analysis.cpp
+	<stdio.h>
+	<iostream>
+	<string.h>
+	"Lexical.h"
+	<fstream>
+	<stdlib.h>
+
+1543495017 e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú“ª\c0_complier\lexical.h
+	<stdio.h>
+	"Lexical_func.h"
+	<fstream>
+
+1545295337 e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú“ª\c0_complier\lexical_func.h
+	<fstream>
+
+1544927930 source:e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú“ª\c0_complier\main.cpp
+	<stdio.h>
+	"Lexical_func.h"
+	"Syntax_analysis.h"
+	"Global_variable.h"
+	"Translate_Mips.h"
+	"New_Quadruple.h"
+
+1545291029 e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú“ª\c0_complier\syntax_analysis.h
+	"Lexical_func.h"
+	<stdio.h>
+	<fstream>
+
+1545291003 e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú“ª\c0_complier\global_variable.h
+	"symbol_table.h"
+	<fstream>
+
+1544861923 e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú“ª\c0_complier\symbol_table.h
+	"Lexical_func.h"
+	<string>
+
+1544850732 e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú“ª\c0_complier\translate_mips.h
+	"Lexical_func.h"
+	<fstream>
+
+1544793288 e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú“ª\c0_complier\new_quadruple.h
+
+1544793812 source:e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú“ª\c0_complier\new_quadruple.cpp
+	<stdlib.h>
+	<stdio.h>
+	"symbol_table.h"
+	"Syntax_analysis.h"
+	"Translate_Mips.h"
+	"New_Quadruple.h"
+	<iostream>
+
+1544850177 source:e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú“ª\c0_complier\output_quaternary.cpp
+	"Syntax_analysis.h"
+	"symbol_table.h"
+	<iostream>
+	<string.h>
+
+1544790285 source:e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú“ª\c0_complier\symbol_table.cpp
+	"symbol_table.h"
+	<stdlib.h>
+	<string.h>
+	<iostream>
+	"Syntax_analysis.h"
+
+1545359384 source:e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú“ª\c0_complier\syntax_analysis.cpp
+	"Syntax_analysis.h"
+	"symbol_table.h"
+	<stdlib.h>
+	<iostream>
+	<string.h>
+
+1545358313 source:e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú“ª\c0_complier\syntax_error.cpp
+	"Syntax_analysis.h"
+	<iostream>
+	<string.h>
+
+1545357656 source:e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú“ª\c0_complier\translate_mips.cpp
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
+	"symbol_table.h"
+	"Syntax_analysis.h"
+	"Translate_Mips.h"
+	<iostream>
+	<string.h>
+
+1545356875 source:e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú∂˛\c0_complier\lexical_analysis.cpp
+	<stdio.h>
+	<iostream>
+	<string.h>
+	"Lexical.h"
+	<fstream>
+	<stdlib.h>
+
+1543495017 e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú∂˛\c0_complier\lexical.h
+	<stdio.h>
+	"Lexical_func.h"
+	<fstream>
+
+1545295337 e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú∂˛\c0_complier\lexical_func.h
+	<fstream>
+
+1544927930 source:e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú∂˛\c0_complier\main.cpp
+	<stdio.h>
+	"Lexical_func.h"
+	"Syntax_analysis.h"
+	"Global_variable.h"
+	"Translate_Mips.h"
+	"New_Quadruple.h"
+
+1545291029 e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú∂˛\c0_complier\syntax_analysis.h
+	"Lexical_func.h"
+	<stdio.h>
+	<fstream>
+
+1545291003 e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú∂˛\c0_complier\global_variable.h
+	"symbol_table.h"
+	<fstream>
+
+1544861923 e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú∂˛\c0_complier\symbol_table.h
+	"Lexical_func.h"
+	<string>
+
+1544850732 e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú∂˛\c0_complier\translate_mips.h
+	"Lexical_func.h"
+	<fstream>
+
+1544793288 e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú∂˛\c0_complier\new_quadruple.h
+
+1544793812 source:e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú∂˛\c0_complier\new_quadruple.cpp
+	<stdlib.h>
+	<stdio.h>
+	"symbol_table.h"
+	"Syntax_analysis.h"
+	"Translate_Mips.h"
+	"New_Quadruple.h"
+	<iostream>
+
+1544850177 source:e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú∂˛\c0_complier\output_quaternary.cpp
+	"Syntax_analysis.h"
+	"symbol_table.h"
+	<iostream>
+	<string.h>
+
+1544790285 source:e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú∂˛\c0_complier\symbol_table.cpp
+	"symbol_table.h"
+	<stdlib.h>
+	<string.h>
+	<iostream>
+	"Syntax_analysis.h"
+
+1545573182 source:e:\level_three\compilation_projects\ddl_12_23\16061106_Œ‚∑„_≤‚ ‘≥Ã–Ú∂˛\c0_complier\syntax_analysis.cpp
+	"Syntax_analysis.h"
+	"symbol_table.h"
+	<stdlib.h>
+	<iostream>
+	<string.h>
+
+1546612789 source:e:\level_three\compilation_projects\ddl_last\c0_complier\lexical_analysis.cpp
+	<stdio.h>
+	<iostream>
+	<string.h>
+	"Lexical.h"
+	<fstream>
+	<stdlib.h>
+
+1545902290 e:\level_three\compilation_projects\ddl_last\c0_complier\lexical.h
+	<stdio.h>
+	"Lexical_func.h"
+	<fstream>
+
+1545736133 e:\level_three\compilation_projects\ddl_last\c0_complier\lexical_func.h
+	<fstream>
+
+1545902408 source:e:\level_three\compilation_projects\ddl_last\c0_complier\main.cpp
+	<stdio.h>
+	"Lexical_func.h"
+	"Syntax_analysis.h"
+	"Global_variable.h"
+	"Translate_Mips.h"
+	"New_Quadruple.h"
+
+1546049835 e:\level_three\compilation_projects\ddl_last\c0_complier\syntax_analysis.h
+	"Lexical_func.h"
+	<stdio.h>
+	<fstream>
+
+1545902252 e:\level_three\compilation_projects\ddl_last\c0_complier\global_variable.h
+	"symbol_table.h"
+	<fstream>
+
+1545986280 e:\level_three\compilation_projects\ddl_last\c0_complier\symbol_table.h
+	"Lexical_func.h"
+	<string>
+
+1546606704 e:\level_three\compilation_projects\ddl_last\c0_complier\translate_mips.h
+	"Lexical_func.h"
+	<fstream>
+
+1545902298 e:\level_three\compilation_projects\ddl_last\c0_complier\new_quadruple.h
+
+1545895683 source:e:\level_three\compilation_projects\ddl_last\c0_complier\output_quaternary.cpp
+	"Syntax_analysis.h"
+	"symbol_table.h"
+	<iostream>
+	<string.h>
+	"New_Quadruple.h"
+
+1544790285 source:e:\level_three\compilation_projects\ddl_last\c0_complier\symbol_table.cpp
+	"symbol_table.h"
+	<stdlib.h>
+	<string.h>
+	<iostream>
+	"Syntax_analysis.h"
+
+1546615898 source:e:\level_three\compilation_projects\ddl_last\c0_complier\syntax_error.cpp
+	"Syntax_analysis.h"
+	<iostream>
+	<string.h>
+
+1546419904 source:e:\level_three\compilation_projects\ddl_last\c0_complier\new_quadruple.cpp
+	<stdlib.h>
+	<stdio.h>
+	"symbol_table.h"
+	"Syntax_analysis.h"
+	"Translate_Mips.h"
+	"New_Quadruple.h"
+	<iostream>
+
+1546618430 source:e:\level_three\compilation_projects\ddl_last\c0_complier\syntax_analysis.cpp
+	"Syntax_analysis.h"
+	"symbol_table.h"
+	<stdlib.h>
+	<iostream>
+	<string.h>
+
+1546477126 source:e:\level_three\compilation_projects\ddl_last\c0_complier\translate_mips.cpp
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
+	"symbol_table.h"
+	"Syntax_analysis.h"
+	"Translate_Mips.h"
+	"New_Quadruple.h"
 	<iostream>
 	<string.h>
 

@@ -70,10 +70,10 @@ char next_char(FILE *read_in)
 		if (feof(read_in) != 0) {
 			if (symbol == r_brace || temp_symbol=='}') {
 				SaveFile << "The Source program has been read" << endl;
-				exit(0);
+				return 'a';
 			}
 			else {
-				SaveFile << "Something Wrong in the end of the Source code in Line:" << Count_line << endl;
+				cout << "Something Wrong in the end of the Source code in Line:" << Count_line << endl;
 				exit(-1);
 			}
 		}
@@ -86,6 +86,31 @@ char next_char(FILE *read_in)
 	temp = line[Current_location];
 	Current_location += 1;
 	return temp;
+}
+
+void Read_until(FILE *read_in)
+{
+
+    /*( temp_symbol != '}')
+    {
+        temp_symbol = next_char(read_in);
+        if (feof(read_in) != 0)
+        {
+            exit(0);
+            cout << " The wrong program has been read." << endl;
+        }
+    }
+    symbol = r_brace;*/
+    while(temp_symbol != ';' &&  temp_symbol != '}')
+    {
+        temp_symbol = next_char(read_in);
+        if (feof(read_in) != 0)
+        {
+            exit(0);
+            cout << " The wrong program has been read." << endl;
+        }
+    }
+    symbol = semicolon;
 }
 
 enumType next_symbol(FILE *read_in)
@@ -175,7 +200,7 @@ enumType next_symbol(FILE *read_in)
 	}
 	else if (temp_symbol == '+') {				//
 		temp_symbol = next_char(read_in);
-		if (symbol == ident)
+		if (symbol == ident || symbol == intcon || symbol==un_intcon || symbol==r_bracket || symbol==r_parentheses || symbol==charcon)
 		{
 			SaveFile << "plus  +" << endl;
 			ALL_symbol[symbol_count++] = plus_sign;
@@ -207,9 +232,9 @@ enumType next_symbol(FILE *read_in)
 	}
 	else if (temp_symbol == '-') {			//Èç¹ûÊÇ¸ººÅ
 		temp_symbol = next_char(read_in);
-		if (symbol == ident)
+		if (symbol == ident || symbol == intcon || symbol==un_intcon || symbol==r_bracket || symbol==r_parentheses || symbol == charcon)
 		{
-			SaveFile << "minus  +" << endl;
+			SaveFile << "minus  -" << endl;
 			ALL_symbol[symbol_count++] = minus_sign;
 			return minus_sign;
 		}
@@ -241,7 +266,7 @@ enumType next_symbol(FILE *read_in)
 		temp_symbol = next_char(read_in);
 		if ((temp_symbol == '+') || (temp_symbol == '-') || (temp_symbol == '*') || (temp_symbol == '/') || \
 		        ('0' <= temp_symbol && temp_symbol <= '9') || ('A' <= temp_symbol && temp_symbol <= 'Z') || \
-		        ('a' <= temp_symbol && temp_symbol <= 'z')
+		        ('a' <= temp_symbol && temp_symbol <= 'z') || (temp_symbol == '_')
 		   )
 		{
 			real_temp_char = temp_symbol;
@@ -253,12 +278,13 @@ enumType next_symbol(FILE *read_in)
 				return charcon;
 			}
 			else {
-				SaveFile << "There is more than one character in the char in Source code" << "in Line" << Count_line << endl;
+				cout << "There is more than one character in the char in Source code" << "in Line" << Count_line << endl;
 				while (temp_symbol != '\'') {
 					temp_symbol = next_char(read_in);
 				}
 				temp_symbol = next_char(read_in);
 				ALL_symbol[symbol_count++] = wrong_sy;
+				Read_until(read_in);
 				return wrong_sy;
 			}
 		}
@@ -267,8 +293,9 @@ enumType next_symbol(FILE *read_in)
 				temp_symbol = next_char(read_in);
 			}
 			temp_symbol = next_char(read_in);
-			SaveFile << "Wrong character in char" << "in Line" << Count_line << endl;
+			cout << "Wrong character in char" << "in Line" << Count_line << endl;
 			ALL_symbol[symbol_count++] = wrong_sy;
+			Read_until(read_in);
 			return wrong_sy;
 		}
 	}
@@ -277,6 +304,11 @@ enumType next_symbol(FILE *read_in)
 		temp_symbol = next_char(read_in);
 		if (temp_symbol == 32 || temp_symbol == 33 || (35 <= temp_symbol && temp_symbol <= 126)) {
 			while (temp_symbol == 32 || temp_symbol == 33 || (35 <= temp_symbol && temp_symbol <= 126)) {
+			    if(temp_symbol == 92)
+			    {
+			        temp_ident[temp_ident_length] = temp_symbol;
+			        temp_ident_length += 1;
+			    }
 				temp_ident[temp_ident_length] = temp_symbol;
 				temp_symbol = next_char(read_in);
 				temp_ident_length += 1;
@@ -295,7 +327,6 @@ enumType next_symbol(FILE *read_in)
                 strcat(sentence[sentence_count]->string_name, temp_label1);
                 sentence_count += 1;
 
-				ALL_symbol[symbol_count++] = stringcon;
 				return stringcon;
 			}
 			else {
@@ -303,18 +334,33 @@ enumType next_symbol(FILE *read_in)
 					temp_symbol = next_char(read_in);
 				}
 				temp_symbol = next_char(read_in);
-				SaveFile << "The characters in String is wrong in source code" << "in Line" << Count_line << endl;
+				cout << "The characters in String is wrong in source code" << "in Line" << Count_line << endl;
 				ALL_symbol[symbol_count++] = wrong_sy;
+				Read_until(read_in);
 				return wrong_sy;
 			}
 		}
 		else {
+            if(temp_symbol == '\"')
+            {
+                temp_ident[temp_ident_length] = '\0';
+                sprintf(temp_label1, "%d", sentence_count);
+                sentence[sentence_count] = (String_code*)malloc(sizeof(String_code));
+                strcpy(sentence[sentence_count]->string_name, "string");
+
+                strcpy(sentence[sentence_count]->string_sce, temp_ident);
+                strcat(sentence[sentence_count]->string_name, temp_label1);
+                sentence_count += 1;
+                temp_symbol = next_char(read_in);
+                return stringcon;
+            }
 			while (temp_symbol != '\"') {
 				temp_symbol = next_char(read_in);
 			}
 			temp_symbol = next_char(read_in);
-			SaveFile << "The First characters of the String is wrong in source code" << "in Line" << Count_line << endl;
+			cout << "The First characters of the String is wrong in source code" << "in Line" << Count_line << endl;
 			ALL_symbol[symbol_count++] = wrong_sy;
+			Read_until(read_in);
 			return wrong_sy;
 		}
 	}
@@ -341,8 +387,9 @@ enumType next_symbol(FILE *read_in)
 			return bne;
 		}
 		else {
-			SaveFile << "Something wrong near the '!' in Source_code" << "in Line" << Count_line << endl;
+			cout << "Something wrong near the '!' in Source_code" << "in Line" << Count_line << endl;
 			ALL_symbol[symbol_count++] = wrong_sy;
+			Read_until(read_in);
 			return wrong_sy;
 		}
 	}
@@ -374,8 +421,9 @@ enumType next_symbol(FILE *read_in)
 	}
 	else {
 		temp_symbol = next_char(read_in);
-		SaveFile << "Unrecognized character in Line" << Count_line << endl;
+		cout << "Unrecognized character in Line" << Count_line << endl;
 		ALL_symbol[symbol_count++] = wrong_sy;
+		Read_until(read_in);
 		return wrong_sy;
 	}
 }

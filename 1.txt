@@ -1,0 +1,65 @@
+const int con = 0;
+const int Con = 6;
+const char c1 = 'b';
+int num;
+char c2;
+
+int max(int a, int b){
+	if(a > b){
+		return (a);
+	}
+	else{
+		return (b);
+	}
+}
+int fac_1(int n)
+{
+	if (n <= 0)
+	{
+		return (1);
+	}
+	else
+	{
+		return (n*fac_1(n - 1));
+	}
+}
+void conter(){
+	num = num + 1;
+}
+void output(int a, int b, int c,int d,int e){
+	printf( "your input is that");
+	printf(a);
+	printf(b);
+	printf(c);
+	printf(d);
+	printf(e);
+	if(con != Con){
+		printf("con is different from Con");
+	}
+	else{
+		{}
+	}
+	printf(5*a+(-a+6*(a-4))-3);
+	
+}
+void main(){
+	int s[5];
+	int i;
+	int t;
+	int n;
+	int con;
+	con = 5;
+	for(i = 0; i < con; i = i + 1){
+		scanf(t);
+		s[i] = t;
+	}
+	num = 0;
+	output(s[0],s[1],s[2],s[3],s[4]);
+	do{
+		n = max(s[num],s[num + 1]);
+		conter();
+	}while(num + 1 < con)
+	t = fac_1(n);
+	printf(t);
+	return;
+}

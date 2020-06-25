@@ -1,60 +1,147 @@
-const int num = 33, number1 = 35, number2 = 36, number6 = 0;
-const char str = '1', str1 = 'a', str2 = 'e', str3 = '9', str4 = '+', str5 = '*';
-int i;
-int letter_only, number3, number4[100];
-char only_letter, str6, str7[200], cal[100], temp_cal;
+const int MAX_NUM = 1024 ;
 
-int function_cal()
+int factorial(int n){
+   if(n<=1) 
+	   return (1);
+   else
+       return(n*factorial(n-1)) ;
+}
+
+int mod(int x, int y){
+   x=x-x/y*y;
+
+   return (x) ;
+}
+
+void swap(int x, int y){
+	int temp;
+
+	printf(" x = ", x) ;
+	printf(" y = ", y) ;
+	temp = x;
+	x=y;
+	y=temp;
+	printf(" SWAP x = ", x) ;
+	printf(" SWAP y = ", y) ;
+}
+
+
+void complete_num(int val)
 {
-	int i;
-	int cal_num1, cal_flag, cal_num3, cal_num, cal_result;
-	char temp_in;
-	cal_num1 = 0;
-	cal_flag = 0;
+  int k[128];
+  int i,j,n,s,x1;
+  int m,k2,h,leap,x2;
+  int a,b,c ;
 
-	for (i = 0; i < 10; i = i + 1) {
-		scanf(temp_in);
-		cal[i] = temp_in;
-	}
-	for (i = 0; i < 10; i = i + 1)
-	{
-		cal_num1 = 0;
-		cal_num = 0;
-		do
-		{
-			temp_cal = cal[i];
-			if (temp_cal >= '0') {
-				cal_num = temp_cal - '0';
-				cal_num1 = 10 * cal_num1 + cal_num;
-				i = i + 1;
-			}
-		}
-		while (temp_cal >= '0')
-		cal_flag = cal_flag + 1;
-		if (cal_flag == 1)
-			cal_result = cal_result + cal_num1;
-		else
-		{
-			if (temp_cal == str4)
-				cal_result = cal_result + cal_num1;
-			else
-				cal_result = cal_result + cal_num1;
-		}
-	}
-	return (cal_result);
+  j=val;
+  do
+  {
+    n = -1;
+    s = j;
+	i=1;
+    do
+    {
+      x1 = (j/i) * i ;
+      if( mod(j,i) == 0 )
+      {
+        n = n + 1;
+        s = s - i;
+	   if (n >= 128)
+		  printf(" OVERFLOW!          ") ;
+       else
+		  k[n] = i;
+      }
+	  else
+		  ;
+	  i=i+1;
+    }while(i<j)
+
+    if(s==0)
+    {
+      printf(" complete number: ",j);
+	  i=0;
+	  do
+	  {
+      	printf("  ",k[i]);
+		i=i+1;
+	  }while(i<=n)
+      printf("          ") ;
+    }
+	else
+		;
+    j=j+1;
+  }while(j< MAX_NUM)
+
+  printf(" ---------------------------------------------------------------          ");
+  a = 0 ;
+  i=0;
+  do{
+    b = a *i ;
+    c = j * n ;
+    a = a *i ;
+    a = a + b + c;
+	i=i+1;
+  }while(i< MAX_NUM )
+
+  b = a ;
+  i=0;
+  do{
+    b = b + i ;
+	i=i+1;
+  }while( i < MAX_NUM )
+
+  printf(" b = ", b) ;
+
+
+
+  printf(" ---------------------------------------------------------------          ");
+  h = 0 ;
+  leap = 1 ;
+  m = 2;
+  do
+  {
+    k2 = m / 2;
+	i = 2;
+    do{
+      x2 = (m/i)*i ;
+      if( mod(m,i) == 0)
+      {
+        leap=0;
+      }
+	  else
+		  ;
+	  i=i+1;
+    }while( i<=k2 )
+    if(leap == 1)
+    {
+      printf(" ",m);
+      h = h +1;
+
+      x2 = (h/10)*10 ;
+      if( x2 == h )
+        printf("          ");
+	  else
+		  ;
+     }
+	 else
+		 ;
+     leap=1;
+	 m=m+1;
+  }while( m <= MAX_NUM )
+
+  printf("          The total is ",h);
+
 }
 
 
 void main()
 {
-	const int constant1 = 12, constant2 = 13;
-	const char constant3 = 'f', constant4 = 'w';
-	int in_num, out_num, i;
-	char in_str, out_str;
-	i = 5;
-	out_num = (constant1 - i) * constant2 + function_cal();
-	printf("   ");
-	printf(out_num);
-	printf("\n");
-	return ;
+   int n ;
+
+   n = factorial(10) ;
+   printf(" 10! = ", n) ;
+
+   swap(5,10) ;
+
+   complete_num(2) ;
 }

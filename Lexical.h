@@ -6,6 +6,7 @@
 using namespace std;
 
 
+
 extern enumType symbol;
 
 //Reserved word declaration
@@ -28,4 +29,5 @@ extern enumType ALL_symbol[5000];		//所有的标识符存起来
 extern int symbol_count;
 extern String_code* sentence[200];
 extern int sentence_count;
+extern int WITHER_WRONG;
 ofstream SaveFile("result.txt");   //

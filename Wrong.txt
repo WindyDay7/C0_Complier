@@ -1,0 +1,31 @@
+Unrecognized characters appear in the factor, strange characters in Line 96
+The '+' and '-' numbers in the for loop are incorrect in Line 96
+The step size in the for loop is not an unsigned integer in Line 96
+The semicolon after the statement is wrong in Line 96
+The end of some statements is not a semicolon in Line96
+An unrecognized identifier appears at the beginning of the statement or in the statement in Line96
+Inconsistent identifier in the for statement in Line 96
+Assignment statement assigns an int data type to a char data type in Line96
+When the function is called, the parameter data type does not match. in Line96
+The loop identifier in the for statement can only be of type int in Line 96
+Illegal function call, in Line 96
+The number of parameters is not right in Line 96
+There is no "main" function, or there is a function after the "main" function in Line 96
+The data type returned by the function is incorrect. in Line 96
+Function with return value does not return data in Line 96
+A function without a return value returns a value in Line 96
+Constant is assigned in Line 96
+ Judgment condition has characters in Line 96
+The array is out of bounds in Line96
+Array subscript is not an integer in Line 96
+Right parenthesis does not match in Line 96
+The number of parameters is not right in Line 100
+There is no "main" function, or there is a function after the "main" function in Line 100
+The data type returned by the function is incorrect. in Line 100
+Function with return value does not return data in Line 100
+A function without a return value returns a value in Line 100
+Constant is assigned in Line 100
+ Judgment condition has characters in Line 100
+The array is out of bounds in Line100
+Array subscript is not an integer in Line 100
+Right parenthesis does not match in Line 100

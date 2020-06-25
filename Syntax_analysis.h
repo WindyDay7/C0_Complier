@@ -31,6 +31,7 @@ extern int temp_count;
 extern int Label_count;
 
 extern ofstream Syntax_Result;
+extern ofstream Wrong;
 
 void enter_constant(int int_or_char, int wh_global);
 void enter_variable(int int_or_char, int wh_global);
@@ -65,5 +66,7 @@ extern Intermediate_Code* Code_txt[4000];
 extern String_code* sentence[200];
 extern int sentence_count;
 extern int Reserved;
+extern int WITHER_WRONG;
+extern int Current_line_length;
 
 #endif // GRAMMER_ANALYSIS_H_INCLUDED

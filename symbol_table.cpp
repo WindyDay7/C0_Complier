@@ -38,6 +38,13 @@ void enter_Global_symbol_table(char name_in[], Symbol_Table_Type type_informatio
 	return ;
 }
 
+void enter_Temp_symbol_table(int count_num, int address, int parent_addr)
+{
+    Temp_symbol_table[count_num] = (Symbol_Table*)malloc(sizeof(Symbol_Table));
+    Temp_symbol_table[count_num]->length = count_num;
+    Temp_symbol_table[count_num]->address = address;
+    Temp_symbol_table[count_num]->temp_address = parent_addr;
+}
 
 int look_Global(char Look_name[])		//符号表需要返回标识符在符号表的位置
 {

@@ -14,7 +14,7 @@ enum Symbol_Table_Type {valued_function_kind, invalued_function_kind, variable_k
                         array_kind, parameter_kind
                        };
 
-enum Quaternary_kind { funct_declare, funct_call, funct_return, expression, Con_judge, GOTO, BNZ, BZ, With_Label, \
+enum Quaternary_kind { funct_declare, funct_call, funct_return, expression, endow_assign ,Con_judge, GOTO, BNZ, BZ, With_Label, \
 					   array_number, number_array, Negate, push, funct_result, para_declare, read_code, write_code
 };
 
@@ -49,7 +49,12 @@ struct Register
     int status;
     int number_in;
     int global_in;          //Parent_num 如果是临时寄存器，表示如果使用过为0，没用过为1，
-    int Parent_num;         //表示这个寄存器在哪个函数使用，
+    int Parent_num;         //表示这个寄存器在哪个函数使用，临时寄存器的parent表示是否存入了内存
+};
+
+struct Funct_para_List
+{
+
 };
 
 extern enumType symbol;
@@ -58,3 +63,4 @@ extern enumType symbol;
 char next_char(FILE *read_in);
 enumType next_symbol(FILE *read_in);
 void initialize();
+void Read_until(FILE *read_in);

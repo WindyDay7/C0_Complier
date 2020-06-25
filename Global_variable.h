@@ -29,6 +29,7 @@ int part_start = 0;			//搜索局部符号表开始的位置
 char current_function[20];	//当前处理的函数名
 // string Empty_name = "ALL";
 int Reserved = 0;           //表示全局变量预留空间的大小
+int Funct_call_count = 0;   //表示第多少次函数调用
 
 int Gstn = 1;
 int Pstn = 1;
@@ -39,17 +40,27 @@ int temp_count = 0;     //表示临时变量的标号
 int Label_count = 0;		//表示用于作为Label的个数，，
 
 ofstream Syntax_Result("syntax_result.txt");   //输出流，输出到文件
+ofstream Wrong("Wrong.txt");
+
+Intermediate_Code* New_Code[4000];       //语义分析，中间代码
+int New_Code_Line = 0;
 
 Symbol_Table* Global_symbol_table[100];
 Symbol_Table* Partial_symbol_table[100];
-
+Symbol_Table* Temp_symbol_table[2000];
 
 Register Temp_Register[10] = {0};
 Register Global_Register[8] = {0};
 Register Function_Register[4] = {0};
-Register try1[100][2] ={0};
+
+int Last_unlucky_Temp = 0;
+int Last_unlucky_Global = 0;
 ofstream MIPS_code("MIPS_code.txt");
 int MIPS_funct_addr = 0;
 int MIPS_count_line = 0;
+
+
+int WITHER_WRONG = 0;
+
 
 #endif // GLOBAL_VARIABLE_H_INCLUDED

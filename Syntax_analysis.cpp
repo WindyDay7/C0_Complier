@@ -13,6 +13,7 @@ void enter_constant(int int_or_char, int wh_global)
 		if (symbol != ident)
 		{
 			deal_error(1);
+			Read_until(fp);
 			return ;		//不是标识符的话，问题很大啊
 		}
 		else
@@ -21,6 +22,7 @@ void enter_constant(int int_or_char, int wh_global)
 			if (symbol != endow)
 			{
 				deal_error(2);
+				Read_until(fp);
 				return ;
 			}
 			else
@@ -31,6 +33,7 @@ void enter_constant(int int_or_char, int wh_global)
 					if (symbol != intcon && symbol != un_intcon)
 					{
 						deal_error(3);
+						Read_until(fp);
 						return ;
 					}
 					// 先读取一个标识符，然后读取一个等号，然后是数字，在读取等号与数字的时候均不改变temp_ident
@@ -42,7 +45,7 @@ void enter_constant(int int_or_char, int wh_global)
 							if (look_Global(temp_ident))
 							{
 								deal_error(4);
-								return ;			//全局常量重名
+									//全局常量重名
 							}
 							else
 							{
@@ -55,7 +58,7 @@ void enter_constant(int int_or_char, int wh_global)
 							if (look_Partial(temp_ident, part_start))
 							{
 								deal_error(5);
-								return ;   		//局部常量重名
+									//局部常量重名
 							}
 							else
 							{
@@ -70,6 +73,7 @@ void enter_constant(int int_or_char, int wh_global)
 					if (symbol != charcon)
 					{
 						deal_error(6);
+						Read_until(fp);
 						return ;
 					}
 					// 先读取一个标识符，然后读取一个等号，然后是字符，在读取等号与数字的时候均不改变temp_ident
@@ -81,7 +85,7 @@ void enter_constant(int int_or_char, int wh_global)
 							if (look_Global(temp_ident))
 							{
 								deal_error(4);
-								return ;			//全局常量重名
+									//全局常量重名
 							}
 							else
 							{
@@ -94,7 +98,7 @@ void enter_constant(int int_or_char, int wh_global)
 							if (look_Partial(temp_ident, part_start))
 							{
 								deal_error(5);
-								return ;   		//局部常量重名
+									//局部常量重名
 							}
 							else
 							{
@@ -110,6 +114,7 @@ void enter_constant(int int_or_char, int wh_global)
 		if (symbol != comma && symbol != semicolon)
 		{
 			deal_error(9);
+			Read_until(fp);
 			return ;		//常量声明的时候，末尾的分号不正确，或者中间的逗号不正确
 		}
 	}
@@ -117,17 +122,33 @@ void enter_constant(int int_or_char, int wh_global)
 
 void enter_variable(int int_or_char, int wh_global)
 {
+    char Start[20] = {0};
+    int temp_line_count = 0;
+    if(int_or_char)
+        strcpy(Start, "int ");
+    else
+        strcpy(Start, "char ");
+
+    temp_line_count = Count_line;
 	while (symbol != semicolon)
 	{
 		symbol = next_symbol(fp);		//先读标识符
 		if (symbol != ident)
 		{
 			deal_error(1);
+			Read_until(fp);
 			return ;	//不是标识符的话，问题很大啊，直接退出吧
 		}
 		symbol = next_symbol(fp);		//再读逗号，或者是'['，或者是'(',或者是分号
 		if (symbol == l_parentheses && wh_global == 1)		//如果是左小括号，说明不是变量定义，而是函数声明,但这仅在全局变量声明的时候起作用
 		{
+		    if(temp_line_count != Count_line)
+            {
+                strcat(Start, temp_ident);
+                strcat(Start, line);
+                strcpy(line, Start);
+                Current_line_length = strlen(line);
+            }
 			Current_location = 1;		//下一次读的时候从这一行的开头开始读
 			temp_symbol = line[0];		//词法分析时候预读的一个
 			break;				//这里是正常结束，不是错误结束
@@ -141,7 +162,7 @@ void enter_variable(int int_or_char, int wh_global)
 					if (look_Global(temp_ident))
 					{
 						deal_error(4);
-						return ;		//全局变量的名冲突
+								//全局变量的名冲突
 					}
 					else
 					{
@@ -154,7 +175,7 @@ void enter_variable(int int_or_char, int wh_global)
 					if (look_Partial(temp_ident, part_start))
 					{
 						deal_error(5);
-						return ;   	//局部变量名冲突，
+						  	//局部变量名冲突，
 					}
 					else
 					{
@@ -170,7 +191,7 @@ void enter_variable(int int_or_char, int wh_global)
 					if (look_Global(temp_ident))
 					{
 						deal_error(4);
-						return ;		//全局变量的名冲突
+						//全局变量的名冲突
 					}
 					else
 					{
@@ -183,7 +204,7 @@ void enter_variable(int int_or_char, int wh_global)
 					if (look_Partial(temp_ident, part_start))
 					{
 						deal_error(5);
-						return ;   	//局部变量名冲突，
+						//局部变量名冲突，
 					}
 					else
 					{
@@ -201,12 +222,13 @@ void enter_variable(int int_or_char, int wh_global)
 			if (symbol != intcon  && symbol != un_intcon)
 			{
 				deal_error(7);
-				return ;		//数组定义阶段，只能是用数字表示大小
+					//数组定义阶段，只能是用数字表示大小
 			}
 			symbol = next_symbol(fp);		//接下来读到右括号
 			if (symbol != r_bracket)
 			{
 				deal_error(8);
+				Read_until(fp);
 				return ;			//数组的右括号不匹配
 			}
 			else 						//数组正确
@@ -218,7 +240,8 @@ void enter_variable(int int_or_char, int wh_global)
 						if (look_Global(temp_ident))
 						{
 							deal_error(4);
-							return ;		//全局数组变量的名冲突
+
+							//全局数组变量的名冲突
 						}
 						else
 						{
@@ -231,7 +254,7 @@ void enter_variable(int int_or_char, int wh_global)
 						if (look_Partial(temp_ident, part_start))
 						{
 							deal_error(5);
-							return ;   	//局部变量名冲突，
+								//局部变量名冲突，
 						}
 						else
 						{
@@ -248,7 +271,7 @@ void enter_variable(int int_or_char, int wh_global)
 						if (look_Global(temp_ident))
 						{
 							deal_error(4);
-							return ;		//全局数组变量的名冲突
+								//全局数组变量的名冲突
 						}
 						else
 						{
@@ -265,7 +288,7 @@ void enter_variable(int int_or_char, int wh_global)
 						if (look_Partial(temp_ident, part_start))
 						{
 							deal_error(5);
-							return ;   	//局部变量名冲突，
+								//局部变量名冲突，
 						}
 						else
 						{
@@ -289,6 +312,7 @@ void enter_variable(int int_or_char, int wh_global)
 		else
 		{
 			deal_error(9);
+			Read_until(fp);
 			return ;	//变量声明中出现未知符号，既不是',' 也不是 ';'
 		}
 
@@ -301,6 +325,7 @@ void enter_function(int func_kind)
 	if (symbol != ident && (symbol != main_sy || func_kind != 0))
 	{
 		deal_error(10);
+		Read_until(fp);
 		return ;		//函数名不是标识符，错误
 	}
 	else
@@ -308,6 +333,7 @@ void enter_function(int func_kind)
 		if (look_Global(temp_ident))			//如果有函数名冲突，全局变量冲突
 		{
 			deal_error(4);
+			Read_until(fp);
 			return ;
 		}
 		else
@@ -336,11 +362,11 @@ int enter_parameter(int int_or_char)			//登陆参数到局部变量信息表，
 	if (symbol != ident)
 	{
 		deal_error(1);		//参数不是标识符
-		return 0;
 	}
 	if (look_Partial(temp_ident, part_start))
 	{
 		deal_error(5);
+		Read_until(fp);
 		return 0;		//局部变量信息表中，参数名冲突
 	}
 	else 		//局部变量信息表，参数不冲突
@@ -386,6 +412,7 @@ void deal_constant(int wh_global)		//处理常量定义，判断是全局的还�
 					symbol = next_symbol(fp);
 				}
 				deal_error(0);
+				Read_until(fp);
 				return ;	//如果const后面不是int型也不是char型，那么说明这一行有错误，忽视这一行
 			}
 			symbol = next_symbol(fp);		//继续向下读，可能是const，也可能不是，不是表示常量定义完了,常量定义预读了一个
@@ -446,6 +473,7 @@ void deal_parameter()		//处理参数，形式参数
 			if (symbol != comma && symbol != r_parentheses)
 			{
 				deal_error(15);
+				Read_until(fp);
 				return ;		//标识符之间不是用逗号分割的,且不是右括号
 			}
 		}
@@ -464,6 +492,7 @@ void deal_parameter()		//处理参数，形式参数
 			if (symbol != comma && symbol != r_parentheses)
 			{
 				deal_error(15);
+				Read_until(fp);
 				return ;		//标识符之间的逗号错误。
 			}
 		}
@@ -474,6 +503,7 @@ void deal_parameter()		//处理参数，形式参数
 		else 		//表示参数列表错误
 		{
 			deal_error(0);
+			Read_until(fp);
 			return ;		//标识符的类型错误，不是int也不是char
 		}
 	}
@@ -484,35 +514,49 @@ void deal_parameter()		//处理参数，形式参数
 
 void deal_arguments()			//处理有返回值的函数调用，无返回值的函数调用语句一样
 {
-	Intermediate_Code temp_Code;		//定义一个临时行
+	Intermediate_Code temp_Code = {};		//定义一个临时行
 	int function_location = 0, argument_kind = 0, argument_count = 0;
 	Expression_result temp_result;
-	int parameter_location = 0;
+	int parameter_location = 0, Funct_length = 0, count_num = 0;
+	Intermediate_Code* Temp_Code_line;
+
+
+
 	function_location = look_Global(temp_ident);		//这个返回值是函数在全局符号表的位置
+	Funct_length = Global_symbol_table[function_location]->length;
 	parameter_location = Global_symbol_table[function_location]->address;   //该函数的第一个参数在局部符号表的位置
 	symbol = next_symbol(fp);	//对于有返回值的函数调用，需要看后面是不是')'
+	Temp_Code_line = (Intermediate_Code*)malloc(sizeof(Intermediate_Code) * Funct_length);
+
+
 	while (symbol != r_parentheses)		//遇到右括号表示参数处理完了，如果一开始就读到右括号，表示没有实参
 	{
 		temp_result = deal_expression();			//这里已经预读了表达式里面的一个单词
 
 		//递归处理表达式，返回表达式的结果          //处理完表达式要生成中间代码
-		Code_txt[Inter_Code_Line] = (Intermediate_Code*)malloc(sizeof(Intermediate_Code));      //新开一行，存储四元式
-		Code_txt[Inter_Code_Line]->number1_lc = temp_result.temp_local;
-		Code_txt[Inter_Code_Line]->global_1 = temp_result.un_partial;
-		Code_txt[Inter_Code_Line]->number2_lc = function_location;
-		Code_txt[Inter_Code_Line]->global_2 = 1;
-		Code_txt[Inter_Code_Line]->Code_type = push;
-		Inter_Code_Line += 1;       //行数加1
+		Temp_Code_line[count_num].number1_lc = temp_result.temp_local;
+		Temp_Code_line[count_num].global_1 = temp_result.un_partial;
+		Temp_Code_line[count_num].number2_lc = function_location;
+		Temp_Code_line[count_num].global_2 = 1;
+		Temp_Code_line[count_num].number3_lc = argument_count;
+		Temp_Code_line[count_num].Code_type = push;
+		count_num += 1;
 		argument_count += 1;
+		if(argument_count > Global_symbol_table[function_location]->length)
+        {
+            deal_error(30);
+            Read_until(fp);
+            return ;
+        }
 		if (Partial_symbol_table[parameter_location]->data_type != temp_result.result_data_kind)	//在局部符号表中查找参数类型，
 		{
 			deal_error(27);
-			return ;
 		}
 		// 表达式处理结束之后已经预读了下一个单词
 		if (symbol != comma && symbol != r_parentheses)
 		{
 			deal_error(15);
+			Read_until(fp);
 			return ; 		//函数调用的时候，实参那里括号和逗号不对
 		}
 		else if (symbol == r_parentheses)
@@ -522,14 +566,21 @@ void deal_arguments()			//处理有返回值的函数调用，无返回值的函
 		parameter_location += 1;    //局部参数往后推一位
 		symbol = next_symbol(fp);	//对于有返回值的函数调用，需要看后面是不是')'
 	}
+	for(int i = 0; i < count_num; i++)
+    {
+        new_MidLine(Temp_Code_line[i]);
+    }
+
 	temp_Code.Code_type = funct_call;
 	strcpy(temp_Code.Label, Global_symbol_table[function_location]->name);
 	temp_Code.number1_lc = function_location;
+
 	new_MidLine(temp_Code);
 	//call  function  函数调用四元式
 	if (argument_count != Global_symbol_table[function_location]->length)
 	{
 		deal_error(30);
+		Read_until(fp);
 		return ;
 	}
 }
@@ -542,6 +593,7 @@ Expression_result deal_factor()
 	// 因子已经预读了一个
 	Expression_result result = {0};
 	Intermediate_Code temp_Code = {};	//如果是数组或者时函数调用的话，要定义一个临时的Code,多一行代码
+	int length = 0;
 	if (symbol == l_parentheses)		//如果是左括号，表达式是因子
 	{
 		symbol = next_symbol(fp);		//读取表达式的开头
@@ -549,8 +601,10 @@ Expression_result deal_factor()
 		if (symbol != r_parentheses)
 		{
 			deal_error(16);
+			Read_until(fp);
 			return result;			//因子中的表达式处理不正确，缺失右小括号
 		}
+		result.result_data_kind = 1;        //只要是表达式，后面就是整数类型
 		symbol = next_symbol(fp);		//预读因子后面的单词
 		// result->un_partial = 2;		//如果是表达式，那么第一个是临时变量
 	}
@@ -561,16 +615,40 @@ Expression_result deal_factor()
 			if (!look_Global(temp_ident))			//如果全局符号表也没找到
 			{
 				deal_error(18);
+				Read_until(fp);
 				return result;		//未定义的标识符，找不到
 			}
 			result.temp_local = look_Global(temp_ident);
 			result.un_partial = 1;		//表示全局变量
+			length = Global_symbol_table[result.temp_local]->length;
+			if(Global_symbol_table[result.temp_local]->type_information == constant_kind)
+            {
+                result.un_partial = 3;
+                result.temp_local = ident_data_kind? Global_symbol_table[result.temp_local]->const_int : Global_symbol_table[result.temp_local]->const_char;
+            }
+            else if(Global_symbol_table[result.temp_local]->type_information == variable_kind)
+            {
+                temp_count += 1;
+                temp_Code.global_1 = 2;
+                temp_Code.number1_lc = temp_count;
+                temp_Code.global_2 = 1;
+                temp_Code.number2_lc = result.temp_local;
+                temp_Code.Code_type = endow_assign;
+                new_MidLine(temp_Code);         //如果是全局变量作为因子的话，要先将全局变量存在临时寄存器中
+                result.temp_local = temp_count;
+                result.un_partial = 2;      //现在返回的不是全局变量了，而是一个临时变量
+            }
 		}
-		if (result.un_partial != 1)		//如果不是全局变量
+		if (result.un_partial == 0)		//如果不是全局变量, 因为如果是全局变量会改变unpatial
 		{
 			result.temp_local = look_Partial(temp_ident, part_start);		//位置也知道了
 			result.un_partial = 0;		//表示是局部变量
-
+			length = Partial_symbol_table[result.temp_local]->length;
+            if(Partial_symbol_table[result.temp_local]->type_information == constant_kind)
+            {
+                result.un_partial = 3;
+                result.temp_local = ident_data_kind? Partial_symbol_table[result.temp_local]->const_int : Partial_symbol_table[result.temp_local]->const_char;
+            }
 		}
 
 		result.result_data_kind = ident_data_kind;
@@ -584,6 +662,15 @@ Expression_result deal_factor()
 			symbol = next_symbol(fp);		//表达式开始之前也预读下一个单词
 			temp_result = deal_expression();		//表达式结束之后已经预读了下一个单词
 
+            if(temp_result.un_partial == 3 && (temp_result.temp_local >= length || temp_result.temp_local < 0))
+            {
+                deal_error(37);
+            }
+            if(temp_result.result_data_kind != 1)
+            {
+                deal_error(38);
+                // 数组下标不是整形
+            }
 			temp_Code.number3_lc = temp_result.temp_local;
 			temp_Code.global_3 = temp_result.un_partial;		//表达式的返回值作为第三个操作数
 			temp_count += 1;            //不是处理完表达式，temp_count就加1，而是在使用temp_count之前加1
@@ -595,6 +682,7 @@ Expression_result deal_factor()
 			if (symbol != r_bracket)		//如果这个单词不是右中括号
 			{
 				deal_error(8);
+				Read_until(fp);
 				return result;			//数组在因子中的使用不正确
 			}
 			else 		//数组处理正确
@@ -621,6 +709,7 @@ Expression_result deal_factor()
 			else
 			{
 				deal_error(29);
+				Read_until(fp);
 				return result;
 			}
 			result.un_partial = 2;		//表示函数调用，需要左括号，所以是临时变量
@@ -644,8 +733,8 @@ Expression_result deal_factor()
 	}
 	else
 	{
-		symbol = next_symbol(fp);	//预读下一个字符
 		deal_error(19);
+		Read_until(fp);
 		return result;		//因子中出现未识别的单词，错误
 	}
 	return result;
@@ -712,6 +801,7 @@ void new_MidLine(Intermediate_Code temp_line)
 
 Expression_result deal_expression()		//处理表达式
 {
+
 	Expression_result result = {0};
 	Intermediate_Code temp_Code = {};		//定义一个临时行
 	int plus_flag = 0, minus_flag = 0;
@@ -794,11 +884,19 @@ void deal_condition()			//处理条件, 处理条件后面一定是跳转，否�
 	symbol = next_symbol(fp);		//表达式之前先读表达式中的一个字符
 	result_1 = deal_expression();		//处理表达式,处理表达式后会预读下一个字符
 	// beq, bne, bge, bgt, ble, blt,
+	if(result_1.result_data_kind == 0)
+    {
+         deal_error(36);
+    }
 	if (symbol == beq || symbol == bne || symbol == bge || symbol == bgt || symbol == ble || symbol == blt)
 	{
 		temp_symbol = symbol;
 		symbol = next_symbol(fp);		//有关系运算符的话，继续处理表达式
 		result_2 = deal_expression();		//处理表达式,处理表达式后会预读下一个字符
+		if(result_1.result_data_kind == 0 || result_2.result_data_kind == 0)
+        {
+            deal_error(36);
+        }
 	}
 	temp_Code.number2_lc = result_1.temp_local;
 	temp_Code.global_2 = result_1.un_partial;
@@ -828,6 +926,7 @@ void deal_statement_if()
 	if (symbol != l_parentheses)
 	{
 		deal_error(13);
+		Read_until(fp);
 		return ;		//if语句中左边的小括号错误，
 	}
 	else 		//if语句中括号正确，开始处理条件
@@ -845,11 +944,13 @@ void deal_statement_if()
 		if (symbol != r_parentheses)
 		{
 			deal_error(16);
+			Read_until(fp);
 			return ;		//if语句中条件那里错误，')'错误，右小括号错误
 		}
 		else
 		{
 			symbol = next_symbol(fp);			//处理语句的时候要预读语句中的一个单词
+
 			deal_statement();		//如果正确，条件格式正确，处理if之后的语句
 			if(symbol == else_sy)   //如果有else语句，那么就要生成一条跳转到else语句末尾的指令
             {
@@ -891,6 +992,7 @@ void deal_statement_while()			//处理do_while语句
 	strcpy(temp_label2, temp_Code1.Label);
 	strcat(temp_Code1.Label, ":");    //	拼成一个标签四元式
 	temp_Code1.Code_type = With_Label;
+	temp_Code1.operate_cal = 2;         //表示返回的Label，就是往回调的Label
 	new_MidLine(temp_Code1);
 
 	Syntax_Result << "This is a do___while statement in line  " << Count_line << endl;
@@ -900,18 +1002,21 @@ void deal_statement_while()			//处理do_while语句
 	if (symbol != while_sy)
 	{
 		deal_error(17);
+		Read_until(fp);
 		return ;		//do__while语句中，后面的那个while错误
 	}
 	symbol = next_symbol(fp);		//while之后继续读一个
 	if (symbol != l_parentheses)
 	{
 		deal_error(13);
+		Read_until(fp);
 		return ;		//do__while语句中的条件那里的括号错误
 	}
 	else
 	{
 		deal_condition();		//处理条件，会预读下一个单词
 		temp_Code2.Code_type = BNZ;		//满足条件跳转
+		temp_Code2.operate_cal = 2;
 		strcpy(temp_Code2.Label, temp_label2);
 		new_MidLine(temp_Code2);
 
@@ -919,6 +1024,7 @@ void deal_statement_while()			//处理do_while语句
 	if (symbol != r_parentheses)
 	{
 		deal_error(16);
+		Read_until(fp);
 		return ;		//如果条件结束之后不是')',右小括号，那么说明错误
 	}
 }
@@ -963,6 +1069,7 @@ Expression_result deal_for_ident()				//这里int返回的是for中记录变量�
 		if (!look_Global(for_ident_line[0]))			//如果全局符号表也没找到
 		{
 			deal_error(18);
+			Read_until(fp);
 			return temp_for_result;		//未定义的标识符，找不到
 		}
 		temp_for_result.temp_local = look_Global(for_ident_line[0]);
@@ -976,6 +1083,7 @@ Expression_result deal_for_ident()				//这里int返回的是for中记录变量�
 	if (ident_data_kind != 1)
 	{
 		deal_error(28);
+		Read_until(fp);
 		temp_for_result.temp_local = 0;
 		return temp_for_result;
 	}
@@ -1003,6 +1111,7 @@ void deal_statement_for()
 	if (symbol != l_parentheses)
 	{
 		deal_error(13);
+		Read_until(fp);
 		return ; 		//for后面的那个小括号不正确
 	}
 	else
@@ -1011,6 +1120,7 @@ void deal_statement_for()
 		if (symbol != ident)
 		{
 			deal_error(1);
+			Read_until(fp);
 			return ;		//for语句中的那个标识符错误
 		}
 		else
@@ -1019,6 +1129,7 @@ void deal_statement_for()
 			if (symbol != endow)
 			{
 				deal_error(2);
+				Read_until(fp);
 				return ; 		//for语句中的那个等号错误
 			}
 			else
@@ -1031,11 +1142,12 @@ void deal_statement_for()
 				temp_Code1.number2_lc = for_result2.temp_local;
 				temp_Code1.global_2 = for_result2.un_partial;
 				temp_Code1.operate_cal = 6;
-				temp_Code1.Code_type = expression;
+				temp_Code1.Code_type = endow_assign;
 				new_MidLine(temp_Code1);		//for语句的第一句相当于一个赋值语句，
 				if (symbol != semicolon)
 				{
 					deal_error(23);
+					Read_until(fp);
 					return ;		//for语句表达式后面不是分号错误';'
 				}
 				else
@@ -1046,6 +1158,7 @@ void deal_statement_for()
 					strcat(temp_Code2.Label , for_label1);
 					strcat(temp_Code2.Label, ":");
 					Label_count += 1;
+					temp_Code2.operate_cal = 2;         //表示会往回跳的Label
 					new_MidLine(temp_Code2);
 					// 条件判断之前，有一个标签，会跳到这里
 					deal_condition();		//
@@ -1061,6 +1174,7 @@ void deal_statement_for()
 					if (symbol != semicolon)
 					{
 						deal_error(23);
+						Read_until(fp);
 						return ; 		//条件后面的分号不正确
 					}
 					else
@@ -1070,6 +1184,7 @@ void deal_statement_for()
 						if (symbol != ident)
 						{
 							deal_error(1);
+							Read_until(fp);
 							return ;
 						}
 						else
@@ -1078,6 +1193,7 @@ void deal_statement_for()
 							if (symbol != endow)			//等号错误，语句中的等号错误
 							{
 								deal_error(20);
+								Read_until(fp);
 								return ;
 							}
 							else
@@ -1086,6 +1202,7 @@ void deal_statement_for()
 								if (symbol != ident)
 								{
 									deal_error(1);
+									Read_until(fp);
 									return ;
 								}
 								else
@@ -1105,6 +1222,7 @@ void deal_statement_for()
 											if (symbol != r_parentheses)
 											{
 												deal_error(16);
+												Read_until(fp);
 												return ;		//for后面的右小括号错误
 											}
 											else
@@ -1123,6 +1241,7 @@ void deal_statement_for()
 												new_MidLine(temp_Code4);
 												//先i++，然后跳转到condition判断；
 												temp_Code5.Code_type = GOTO;
+                                                temp_Code5.operate_cal = 2;
 												temp_Code2.Label[strlen(temp_Code2.Label) - 1] = 0;
 												strcpy(temp_Code5.Label, temp_Code2.Label);
 												new_MidLine(temp_Code5);
@@ -1137,12 +1256,14 @@ void deal_statement_for()
 										else
 										{
 											deal_error(22);
+											Read_until(fp);
 											return ;		//步长不是无符号整数错误
 										}
 									}
 									else
 									{
 										deal_error(21);
+										Read_until(fp);
 										return ;		//for循环中读到的'+' 与 '-'不正确
 									}
 								}
@@ -1161,43 +1282,65 @@ void deal_assignment()		//
 	Intermediate_Code temp_Code = {};		//数组赋值的代码，a[expression] = expression
 	int left_location = 0;
 	int left_data_kind = 0, right_data_kind = 0;
+	int length = 0;
 	if (look_Partial(temp_ident, part_start))
 	{
 		temp_Code.number1_lc = look_Partial(temp_ident, part_start);	//找出被赋值的符号在符号表的位置
+		if(Partial_symbol_table[temp_Code.number1_lc]->type_information == constant_kind)
+        {
+            deal_error(35);
+        }
+        length = Partial_symbol_table[temp_Code.number1_lc]->length;
 		temp_Code.global_1 = 0;
 	}
 	else
 	{
 		temp_Code.number1_lc = look_Global(temp_ident);
+		if(Global_symbol_table[temp_Code.number1_lc]->type_information == constant_kind)
+        {
+            deal_error(35);
+        }
+        length = Global_symbol_table[temp_Code.number1_lc]->length;
 		temp_Code.global_1 = 1;
 	}
-	left_data_kind = ident_data_kind;		//找打的数据类型
+	left_data_kind = ident_data_kind;		//找到的数据类型
 	Syntax_Result << "This is an assignment statement in line  " << Count_line << endl;
 	if (symbol == endow)		//如果标识符后面直接接等号，
 	{
 		symbol = next_symbol(fp);		//处理表达式
+
 		result = deal_expression();		//获取右边表达式的数据类型
-		if (left_data_kind == 0 && result.result_data_kind == 1)
+		if (left_data_kind != result.result_data_kind)
 		{
-			deal_error(26);				//左边是字符型，表达式是整数型，错误
-			return ;
+			deal_error(26);				//左右两边数据类型不一致
 		}
 		if (symbol != semicolon)		//表达式处理完，预读了表达后面的分号
 		{
 			deal_error(23);
+			Read_until(fp);
 			return ;
 		}
 		temp_Code.number2_lc = result.temp_local;
 		temp_Code.global_2 = result.un_partial;
-		temp_Code.Code_type = expression;
+		temp_Code.Code_type = endow_assign;
 	}
 	else if (symbol == l_bracket)			//如果是数组赋值，
 	{
+
 		symbol = next_symbol(fp);	//左中括号，说明是数组，
-		result = deal_expression();
+		result = deal_expression();     //处理数组中的表达式
+		if(result.un_partial == 3 && (result.temp_local >= length || result.temp_local < 0))
+        {
+            deal_error(37);
+        }
+        if(result.result_data_kind != 1)
+        {
+            deal_error(38);
+        }
 		if (symbol != r_bracket)		//数组右中括号错误
 		{
 			deal_error(8);
+			Read_until(fp);
 			return ;
 		}
 		else
@@ -1206,20 +1349,21 @@ void deal_assignment()		//
 			if (symbol != endow)
 			{
 				deal_error(20);
+				Read_until(fp);
 				return ;
 			}
 			else 					//如果数组括号后面的等号正确
 			{
 				symbol = next_symbol(fp);	//处理表达式
 				result_2 = deal_expression();
-				if (left_data_kind == 0 && result_2.result_data_kind == 1)
+				if (left_data_kind != result_2.result_data_kind)
 				{
 					deal_error(26);
-					return ;
 				}
 				if (symbol != semicolon)
 				{
 					deal_error(23);
+					Read_until(fp);
 					return ;			//最后的分号不正确
 				}
 			}
@@ -1244,6 +1388,7 @@ void deal_statement_read()
 	if (symbol != l_parentheses)
 	{
 		deal_error(13);
+		Read_until(fp);
 		return ;		//scanf后面紧跟左小括号,没右小括号报错
 	}
 	else
@@ -1254,6 +1399,7 @@ void deal_statement_read()
 			if (symbol != ident)			//标识符类型错误
 			{
 				deal_error(1);
+				Read_until(fp);
 				return ;
 			}
 			else 						//标识符类型正确
@@ -1263,6 +1409,7 @@ void deal_statement_read()
 					if (!look_Global(temp_ident))			//如果全局符号表也没找到
 					{
 						deal_error(18);
+						Read_until(fp);
 						return ;		//未定义的标识符，找不到
 					}
 					result.un_partial = 1;
@@ -1284,6 +1431,7 @@ void deal_statement_read()
 				if (symbol != comma && symbol != r_parentheses)
 				{
 					deal_error(15);
+					Read_until(fp);
 					return ;		//错误符号
 				}
 			}
@@ -1292,6 +1440,7 @@ void deal_statement_read()
 		if (symbol != semicolon)
 		{
 			deal_error(23);
+			Read_until(fp);
 			return ;
 		}
 	}
@@ -1306,6 +1455,7 @@ void deal_statement_write()
 	if (symbol != l_parentheses)
 	{
 		deal_error(13);
+		Read_until(fp);
 		return ;		//printf的第一个左小括号就不正确
 	}
 	else 			//printf括号正确
@@ -1328,6 +1478,7 @@ void deal_statement_write()
 				if (symbol != semicolon)
 				{
 					deal_error(23);
+					Read_until(fp);
 					return ;			//分号错误
 				}
 
@@ -1344,6 +1495,7 @@ void deal_statement_write()
 				if (symbol != r_parentheses)
 				{
 					deal_error(16);
+					Read_until(fp);
 					return ;		//处理表达式会预读一个单词，不是右小括号报错
 				}
 				else
@@ -1352,6 +1504,7 @@ void deal_statement_write()
 					if (symbol != semicolon)
 					{
 						deal_error(23);
+						Read_until(fp);
 						return ;			//分号错误
 					}
 
@@ -1370,6 +1523,7 @@ void deal_statement_write()
 			if (symbol != r_parentheses)
 			{
 				deal_error(16);
+				Read_until(fp);
 				return ;
 			}
 			else
@@ -1378,6 +1532,7 @@ void deal_statement_write()
 				if (symbol != semicolon)
 				{
 					deal_error(23);
+					Read_until(fp);
 					return ;		//分号错误
 				}
 
@@ -1399,6 +1554,7 @@ void deal_statement_return()
 		if (Global_symbol_table[return_location]->type_information == valued_function_kind)
 		{
 			deal_error(33);         //有返回值的函数，不能啥也不返回
+			Read_until(fp);
 			return ;
 		}
 		temp_Code.number1_lc = -1;
@@ -1416,6 +1572,7 @@ void deal_statement_return()
 		if (symbol != r_parentheses)		//读表达式后面的括号
 		{
 			deal_error(16);
+			Read_until(fp);
 			return ;		//表达式后面不是右小括号，错误
 		}
 		else
@@ -1423,6 +1580,7 @@ void deal_statement_return()
 			if (Global_symbol_table[return_location]->data_type != result.result_data_kind)
 			{
 				deal_error(32);
+				Read_until(fp);
 				return ;
 			}
 			else
@@ -1437,6 +1595,7 @@ void deal_statement_return()
 					if (symbol != semicolon)
 					{
 						deal_error(23);
+						Read_until(fp);
 						return ;
 					}
 				}
@@ -1482,6 +1641,7 @@ void deal_statement()		//处理语句
 			if (!look_Global(temp_ident))			//如果全局符号表也没找到
 			{
 				deal_error(18);
+				Read_until(fp);
 				return ;		//未定义的标识符，找不到
 			}
 		}
@@ -1501,17 +1661,20 @@ void deal_statement()		//处理语句
 			else
 			{
 				deal_error(29);		//用的不是全局变量的函数调用，而是局部变量 + '('，或者全局变量 + '('
+				Read_until(fp);
 				return ;
 			}
 			if (symbol != semicolon)		//判断函数调用语句后面的分号
 			{
 				deal_error(23);
+				Read_until(fp);
 				return ;
 			}
 		}
 		else
 		{
 			deal_error(24);
+			Read_until(fp);
 			return ;			//处理语句的时候，明明读到了标识符，后面又错了
 		}
 		symbol = next_symbol(fp);		//deal_statement需要预读一个单词
@@ -1544,6 +1707,7 @@ void deal_statement()		//处理语句
 	else
 	{
 		deal_error(24);
+		Read_until(fp);
 		return ;		//不是语句中该出现的单词
 	}
 }
@@ -1561,6 +1725,7 @@ void deal_statement_column()
 
 void deal_function()
 {
+
 	Intermediate_Code temp_Code = {}, temp_Code2 = {};		//定义一个临时行，表示函数声明
 	while (symbol == int_sy || symbol == char_sy || symbol == void_sy)		//函数的声明，这里是函数的声明
 	{
@@ -1582,7 +1747,10 @@ void deal_function()
 		else
 		{
 			deal_error(12);
-			return ;		//读到的函数类型不正确，既不是void，也不是int， 也不是char
+			Read_until(fp);
+			symbol = next_symbol(fp);
+			continue;
+					//读到的函数类型不正确，既不是void，也不是int， 也不是char
 		}
 		if (Inter_Code_Line > 1 && Code_txt[Inter_Code_Line - 1]->Code_type != funct_return)
 		{
@@ -1606,7 +1774,9 @@ void deal_function()
 		if (symbol != l_parentheses)
 		{
 			deal_error(13);
-			return ;		//函数后面的括号不对
+			Read_until(fp);
+			symbol = next_symbol(fp);
+			continue;		//函数后面的括号不对
 		}
 		else 			//函数后面的括号匹配，开始处理形式参数
 		{
@@ -1615,7 +1785,10 @@ void deal_function()
 		symbol = next_symbol(fp);	//再继续读一个，左大括号
 		if (symbol != l_brace)
 		{
-			return ;		//参数声明结束，后面应该是大括号
+		    deal_error(14);
+			Read_until(fp);
+			symbol = next_symbol(fp);
+			continue;		//参数声明结束，后面应该是大括号
 		}
 		else
 		{
@@ -1634,6 +1807,7 @@ void deal_function()
 	if (strcmp(current_function, "main") != 0)
 	{
 		deal_error(31);
+		Read_until(fp);
 		return ;
 	}
 }
