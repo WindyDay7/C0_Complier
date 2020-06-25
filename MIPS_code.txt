@@ -1,0 +1,670 @@
+.data
+Reserved: .space 120
+string0: .asciiz " "
+string1: .asciiz "___________"
+string2: .asciiz "test for success"
+string3: .asciiz "You can choose m numbers permutations from n numbers ? "
+string4: .asciiz "___________"
+string5: .asciiz "error input: 0 < m <= n <= 10"
+
+.text
+j main
+
+
+get_max_num_1:
+addu $fp, $sp, 0
+addi $sp, $sp, 0
+addi $sp, $sp, -4
+sw $ra, 0($sp)
+li $t0, 10
+move $v1, $t0
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+
+get_max_num_2:
+addu $fp, $sp, 0
+addi $sp, $sp, -4
+addi $sp, $sp, -4
+sw $ra, 0($sp)
+li $t0, 10
+move $s0, $t0
+move $v1, $s0
+sw $s0, -4($fp)
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+
+get_2:
+addu $fp, $sp, 0
+addi $sp, $sp, -4
+addi $sp, $sp, -4
+sw $ra, 0($sp)
+li $t0, 2
+move $v1, $t0
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+
+compute:
+addu $fp, $sp, 12
+addi $sp, $sp, -60
+addi $sp, $sp, -4
+sw $ra, 0($sp)
+lw $s0,-12($fp)
+li $t1, 43
+seq $t0, $s0, $t1
+sw $s0, -12($fp)
+beq $t0, $0 Label0
+
+li $t1, 2
+lw $s0,-8($fp)
+mul $t0, $t1, $s0
+lw $s1,-4($fp)
+addu $t1, $s1, $t0
+subu $t0, $t1, $s0
+move $v1, $t0
+sw $s0, -8($fp)
+sw $s1, -4($fp)
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+j Label1
+
+
+Label0:
+lw $s0,-12($fp)
+li $t1, 45
+seq $t0, $s0, $t1
+sw $s0, -12($fp)
+beq $t0, $0 Label2
+
+lw $s0,-8($fp)
+addu $t0, $s0, $s0
+div $t1, $t0, 2
+lw $s1,-4($fp)
+subu $t0, $s1, $t1
+move $v1, $t0
+sw $s0, -8($fp)
+sw $s1, -4($fp)
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+j Label3
+
+
+Label2:
+lw $s0,-12($fp)
+li $t1, 42
+seq $t0, $s0, $t1
+sw $s0, -12($fp)
+beq $t0, $0 Label4
+
+lw $s0,-4($fp)
+lw $s1,-8($fp)
+mul $t0, $s0, $s1
+move $v1, $t0
+sw $s0, -4($fp)
+sw $s1, -8($fp)
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+j Label5
+
+
+Label4:
+lw $s0,-8($fp)
+sne $t0, $s0, $0
+sw $s0, -8($fp)
+beq $t0, $0 Label6
+
+lw $s0,-4($fp)
+lw $s1,-8($fp)
+div $t0, $s0, $s1
+move $v1, $t0
+sw $s0, -4($fp)
+sw $s1, -8($fp)
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+j Label7
+
+
+Label6:
+li $t1, 3
+move $t0, $t1
+mul $t1, $t0, 3
+subu $t0, $t1, 4
+div $t1, $t0, 5
+mul $t0, $t1, 6
+addu $t1, $t0, -7
+addu $t0, $t1, 1
+move $v1, $t0
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+
+Label7:
+
+Label5:
+
+Label3:
+
+Label1:
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+
+permutations:
+addu $fp, $sp, 4
+addi $sp, $sp, -40
+addi $sp, $sp, -4
+sw $ra, 0($sp)
+li $t0, 0
+move $s0, $t0
+lw $s1, 268501104
+move $t0, $s1
+lw $s2,-4($fp)
+seq $t1, $s2, $t0
+sw $s0, -8($fp)
+sw $s1, 268501104
+sw $s2, -4($fp)
+beq $t1, $0 Label8
+
+lw $s0, 268501104
+move $t0, $s0
+lw $s1,-8($fp)
+slt $t1, $s1, $t0
+sw $s0, 268501104
+sw $s1, -8($fp)
+beq $t1, $0 Label9
+
+
+Label10:
+la $a0, string0
+li $v0, 4
+syscall
+lw $s0,-8($fp)
+li $t1, 268501004
+sll $t2, $s0, 2
+addu $t1, $t1, $t2
+lw $t0, 0($t1)
+move $a0, $t0
+li $v0, 1
+syscall
+addu $s0, $s0, 1
+lw $s1, 268501104
+move $t0, $s1
+slt $t1, $s0, $t0
+sw $s0, -8($fp)
+sw $s1, 268501104
+bne $t1, $0 Label10
+
+
+Label9:
+la $a0, string1
+li $v0, 4
+syscall
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+
+Label8:
+lw $s0,-8($fp)
+li $t0, 1
+move $s0, $t0
+sw $s0, -8($fp)
+
+Label11:
+lw $s0,-8($fp)
+li $t1, 268501052
+sll $t2, $s0, 2
+addu $t1, $t1, $t2
+lw $t0, 0($t1)
+li $t2, 0
+sne $t1, $t0, $t2
+sw $s0, -8($fp)
+beq $t1, $0 Label12
+
+j Label13
+
+
+Label12:
+lw $s0,-4($fp)
+lw $s1,-8($fp)
+li $t0, 268501004
+sll $t1, $s0, 2
+addu $t0, $t0, $t1
+sw $s1, 0($t0)
+li $t0, 1
+li $t1, 268501052
+sll $t2, $s1, 2
+addu $t1, $t1, $t2
+sw $t0, 0($t1)
+addu $t0, $s0, 1
+addi $sp, $sp, -4
+sw $t0, 0($sp)
+
+sw $s0, -4($fp)
+sw $s1, -8($fp)
+jal permutations
+
+addu $fp, $fp, 48
+lw $s0, -4($fp)
+lw $s1, -8($fp)
+li $t0, 0
+li $t1, 268501052
+sll $t2, $s1, 2
+addu $t1, $t1, $t2
+sw $t0, 0($t1)
+sw $s0, -4($fp)
+sw $s1, -8($fp)
+
+Label13:
+lw $s0,-8($fp)
+addu $s0, $s0, 1
+lw $s1, 268501100
+move $t0, $s1
+sle $t1, $s0, $t0
+sw $s0, -8($fp)
+sw $s1, 268501100
+bne $t1, $0 Label11
+
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+
+get_permutations_sy:
+addu $fp, $sp, 0
+addi $sp, $sp, -4
+addi $sp, $sp, -4
+sw $ra, 0($sp)
+li $t0, 84
+move $v1, $t0
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+
+judge:
+addu $fp, $sp, 8
+addi $sp, $sp, -12
+addi $sp, $sp, -4
+sw $ra, 0($sp)
+li $t0, 42
+move $a0, $t0
+li $v0, 11
+syscall
+
+jal get_max_num_1
+
+addu $fp, $fp, 24
+move $t0, $v1
+addu $t1, $t0, 1
+lw $s0,-4($fp)
+sge $t0, $s0, $t1
+sw $s0, -4($fp)
+beq $t0, $0 Label14
+
+li $t0, 70
+move $v1, $t0
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+
+Label14:
+lw $s0,-8($fp)
+lw $s1,-4($fp)
+sgt $t0, $s0, $s1
+sw $s0, -8($fp)
+sw $s1, -4($fp)
+beq $t0, $0 Label15
+
+li $t0, 70
+move $v1, $t0
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+
+Label15:
+lw $s0,-8($fp)
+li $t1, 0
+sle $t0, $s0, $t1
+sw $s0, -8($fp)
+beq $t0, $0 Label16
+
+li $t0, 70
+move $v1, $t0
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+
+Label16:
+li $t0, 84
+move $v1, $t0
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+
+preparation:
+addu $fp, $sp, 0
+addi $sp, $sp, -124
+addi $sp, $sp, -4
+sw $ra, 0($sp)
+
+jal get_max_num_1
+
+addu $fp, $fp, 128
+move $t0, $v1
+addi $sp, $sp, -4
+sw $t0, 0($sp)
+addi $sp, $sp, -4
+li $t0, 1
+sw $t0, 0($sp)
+addi $sp, $sp, -4
+li $t0, 43
+sw $t0, 0($sp)
+
+jal compute
+
+addu $fp, $fp, 128
+move $t0, $v1
+move $s0, $t0
+sne $t0, $s0, $0
+sw $s0, -8($fp)
+beq $t0, $0 Label17
+
+
+Label18:
+lw $s0,-8($fp)
+li $t0, -1
+addu $s0, $t0, $s0
+li $t0, 0
+li $t1, 268501052
+sll $t2, $s0, 2
+addu $t1, $t1, $t2
+sw $t0, 0($t1)
+li $t0, 10086
+subu $t1, $fp, 12
+sll $t2, $s0, 2
+subu $t1, $t1, $t2
+sw $t0, -4($t1)
+sne $t0, $s0, $0
+sw $s0, -8($fp)
+bne $t0, $0 Label18
+
+
+Label17:
+
+jal get_2
+
+addu $fp, $fp, 128
+move $t0, $v1
+addi $sp, $sp, -4
+li $t1, 10
+sw $t1, 0($sp)
+addi $sp, $sp, -4
+sw $t0, 0($sp)
+addi $sp, $sp, -4
+li $t0, 43
+sw $t0, 0($sp)
+
+jal compute
+
+addu $fp, $fp, 128
+move $t0, $v1
+lw $s0,-8($fp)
+subu $s0, $t0, 1
+sw $s0, -8($fp)
+
+Label19:
+lw $s0,-8($fp)
+subu $t0, $s0, 1
+li $t2, -1
+move $t1, $t2
+li $t3, 6
+move $t2, $t3
+addu $t3, $t1, $t2
+mul $t1, $t3, 4
+addu $t2, $s0, $t1
+subu $t1, $t2, 21
+subu $t3, $fp, 12
+sll $t4, $t1, 2
+subu $t3, $t3, $t4
+lw $t2, -4($t3)
+subu $t1, $t2, 10086
+li $t2, 268501004
+sll $t3, $t0, 2
+addu $t2, $t2, $t3
+sw $t1, 0($t2)
+subu $s0, $s0, 1
+sne $t0, $s0, $0
+sw $s0, -8($fp)
+bne $t0, $0 Label19
+
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+
+test_for:
+addu $fp, $sp, 0
+addi $sp, $sp, -8
+addi $sp, $sp, -4
+sw $ra, 0($sp)
+li $t0, 1
+move $s0, $t0
+sw $s0, -4($fp)
+
+Label20:
+la $a0, string2
+li $v0, 4
+syscall
+lw $s0,-4($fp)
+addu $s0, $s0, 1
+li $t1, 0
+sne $t0, $t1, $0
+sw $s0, -4($fp)
+bne $t0, $0 Label20
+
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+
+test_6_para:
+addu $fp, $sp, 24
+addi $sp, $sp, -20
+addi $sp, $sp, -4
+sw $ra, 0($sp)
+lw $s0,-4($fp)
+lw $s1,-8($fp)
+addu $t0, $s0, $s1
+lw $s2,-12($fp)
+addu $t1, $t0, $s2
+lw $s3,-16($fp)
+addu $t0, $t1, $s3
+lw $s4,-20($fp)
+addu $t1, $t0, $s4
+lw $s5,-24($fp)
+addu $t0, $t1, $s5
+move $v1, $t0
+sw $s0, -4($fp)
+sw $s1, -8($fp)
+sw $s2, -12($fp)
+sw $s3, -16($fp)
+sw $s4, -20($fp)
+sw $s5, -24($fp)
+lw $ra, 0($sp)
+move $sp, $fp
+jr $ra
+
+main:
+addu $fp, $sp, 0
+addi $sp, $sp, -60
+addi $sp, $sp, -4
+sw $ra, 0($sp)
+
+jal test_for
+
+addu $fp, $fp, 64
+li $v0, 5
+syscall
+move $s0, $v0
+li $v0, 5
+syscall
+move $s1, $v0
+li $v0, 12
+syscall
+move $s2, $v0
+addi $sp, $sp, -4
+sw $s0, 0($sp)
+addi $sp, $sp, -4
+sw $s1, 0($sp)
+addi $sp, $sp, -4
+sw $s2, 0($sp)
+
+sw $s0, -4($fp)
+sw $s1, -8($fp)
+sw $s2, -12($fp)
+jal compute
+
+addu $fp, $fp, 64
+lw $s0, -4($fp)
+lw $s1, -8($fp)
+lw $s2, -12($fp)
+move $t0, $v1
+lw $s3, 268501100
+move $s3, $t0
+li $t0, 95
+move $a0, $t0
+li $v0, 11
+syscall
+move $t0, $s3
+move $a0, $t0
+li $v0, 1
+syscall
+li $v0, 5
+syscall
+lw $s4, 268501104
+move $s4, $v0
+move $t0, $s3
+move $t1, $s4
+addi $sp, $sp, -4
+sw $t0, 0($sp)
+addi $sp, $sp, -4
+sw $t1, 0($sp)
+
+sw $s0, -4($fp)
+sw $s1, -8($fp)
+sw $s2, -12($fp)
+sw $s3, 268501100
+sw $s4, 268501104
+jal judge
+
+addu $fp, $fp, 64
+lw $s0, -4($fp)
+lw $s1, -8($fp)
+lw $s2, -12($fp)
+lw $s3, 268501100
+lw $s4, 268501104
+move $t0, $v1
+move $s5, $t0
+move $t0, $s3
+move $t1, $s4
+addi $sp, $sp, -4
+sw $s0, 0($sp)
+addi $sp, $sp, -4
+sw $s1, 0($sp)
+addi $sp, $sp, -4
+sw $t0, 0($sp)
+addi $sp, $sp, -4
+sw $t1, 0($sp)
+addi $sp, $sp, -4
+li $t0, 1
+sw $t0, 0($sp)
+addi $sp, $sp, -4
+li $t0, 2
+sw $t0, 0($sp)
+
+sw $s0, -4($fp)
+sw $s1, -8($fp)
+sw $s2, -12($fp)
+sw $s3, 268501100
+sw $s4, 268501104
+sw $s5, -16($fp)
+jal test_6_para
+
+addu $fp, $fp, 64
+lw $s0, -4($fp)
+lw $s1, -8($fp)
+lw $s2, -12($fp)
+lw $s3, 268501100
+lw $s4, 268501104
+lw $s5, -16($fp)
+move $t0, $v1
+lw $s6, 268501108
+move $s6, $t0
+move $t0, $s6
+move $a0, $t0
+li $v0, 1
+syscall
+la $a0, string3
+li $v0, 4
+syscall
+move $a0, $s5
+li $v0, 11
+syscall
+la $a0, string4
+li $v0, 4
+syscall
+
+sw $s0, -4($fp)
+sw $s1, -8($fp)
+sw $s2, -12($fp)
+sw $s3, 268501100
+sw $s4, 268501104
+sw $s5, -16($fp)
+sw $s6, 268501108
+jal get_permutations_sy
+
+addu $fp, $fp, 64
+lw $s0, -4($fp)
+lw $s1, -8($fp)
+lw $s2, -12($fp)
+lw $s3, 268501100
+lw $s4, 268501104
+lw $s5, -16($fp)
+lw $s6, 268501108
+move $t0, $v1
+move $s7, $t0
+sne $t0, $s5, $s7
+sw $s0, -4($fp)
+sw $s1, -8($fp)
+sw $s2, -12($fp)
+sw $s3, 268501100
+sw $s4, 268501104
+sw $s5, -16($fp)
+sw $s6, 268501108
+sw $s7, -20($fp)
+beq $t0, $0 Label21
+
+la $a0, string5
+li $v0, 4
+syscall
+j Label22
+
+
+Label21:
+
+jal preparation
+
+addu $fp, $fp, 64
+addi $sp, $sp, -4
+li $t0, 0
+sw $t0, 0($sp)
+
+jal permutations
+
+addu $fp, $fp, 64
+
+Label22:
+li $v0, 10
+syscall

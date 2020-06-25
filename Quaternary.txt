@@ -1,131 +1,221 @@
-input_:
-i = 0
-Label0:
-i < 10
-BZ Label1
-scanf temp
-score[i] = temp
-t1 = score_sum
-t2 = score[i]
-score_sum = t1 + t2
-i = i + 1
-GOTO Label0
-Label1:
-return t-1
-cal_abs:
+get_max_num_1:
+return 10
+get_max_num_2:
+max_num = 10
+return max_num
+get_2:
+return 2
+compute:
 para int a
-a < 0
+para int b
+para char op
+op == 43
+BZ Label0
+t1 = 2 * b
+t2 = a + t1
+t3 = t2 - b
+return t3
+GOTO Label1
+Label0:
+op == 45
 BZ Label2
-t4 = -a
-return t4
+t4 = b + b
+t5 = t4 / 2
+t6 = a - t5
+return t6
 GOTO Label3
 Label2:
-return a
-Label3:
-return t-1
-main:
-max = 0
-min = 100
-call  input_;
-i = 0
+op == 42
+BZ Label4
+t7 = a * b
+return t7
+GOTO Label5
 Label4:
-i < 10
-BZ Label5
-t5 = score[i]
-max < t5
+b != 0
 BZ Label6
-t6 = score[i]
-max = t6
+t8 = a / b
+return t8
+GOTO Label7
 Label6:
-t7 = score[i]
-min > t7
-BZ Label7
-t8 = score[i]
-min = t8
+t9 = 3
+t10 = t9 * 3
+t11 = t10 - 4
+t12 = t11 / 5
+t13 = t12 * 6
+t14 = t13 + -7
+t15 = t14 + 1
+return t15
 Label7:
-i = i + 1
-GOTO Label4
 Label5:
-t9 = score_sum
-t10 = t9 - max
-t11 = t10 - min
-average = t11 / 8
+Label3:
+Label1:
+return t-1
+permutations:
+para int a
 i = 0
-Label8:
-i < 10
+t16 = m
+a == t16
+BZ Label8
+t17 = m
+i < t17
 BZ Label9
-t13 = score[i]
-t14 = t13 - average
-push t14
-call  cal_abs;
-t15 = RET
-difference[i] = t15
-i = i + 1
-GOTO Label8
-Label9:
-max = -1
-min = 1000
-j = 0
-k = 0
-i = 0
 Label10:
-i < 10
-BZ Label11
-t16 = difference[i]
-t16 > max
+printf string0
+t18 = stack[i]
+i = i + 1
+t20 = m
+i < t20
+BNZ Label10
+Label9:
+printf string1
+return t-1
+Label8:
+i = 1
+Label11:
+t21 = used[i]
+t21 != 0
 BZ Label12
-t17 = difference[i]
-max = t17
-j = 0
-most_unfair[j] = i
 GOTO Label13
 Label12:
-t18 = difference[i]
-t18 == max
-BZ Label14
-j = j + 1
-most_unfair[j] = i
-Label14:
+stack[a] = i
+used[i] = 1
+t22 = a + 1
+push t22
+call  permutations;
+used[i] = 0
 Label13:
-t20 = difference[i]
-t20 < min
-BZ Label15
-k = 0
-t21 = difference[i]
-min = t21
-most_fair[k] = i
-GOTO Label16
-Label15:
-t22 = difference[i]
-t22 == min
-BZ Label17
-k = k + 1
-most_fair[k] = i
-Label17:
-Label16:
 i = i + 1
-GOTO Label10
-Label11:
-printf string0
-printf string1
-j = 0
-Label18:
-j = j + 1
-printf string2
-t25 = most_fair[j]
+t24 = n
+i <= t24
+BNZ Label11
+return t-1
+get_permutations_sy:
+return 84
+judge:
+para int n
+para int m
+call  get_max_num_1;
+t25 = RET
 t26 = t25 + 1
-t27 = most_fair[j]
-t27 != 0
+n >= t26
+BZ Label14
+return 70
+Label14:
+m > n
+BZ Label15
+return 70
+Label15:
+m <= 0
+BZ Label16
+return 70
+Label16:
+return 84
+preparation:
+call  get_max_num_1;
+t27 = RET
+push t27
+push 1
+push 43
+call  compute;
+t28 = RET
+n = t28
+n != 0
+BZ Label17
+Label18:
+n = -1 + n
+used[n] = 0
+array[n] = 10086
+n != 0
 BNZ Label18
-printf string3
-k = 0
+Label17:
+call  get_2;
+t30 = RET
+push 10
+push t30
+push 43
+call  compute;
+t31 = RET
+n = t31 - 1
 Label19:
-k = k + 1
-printf string4
-t29 = most_unfair[k]
-t30 = t29 + 1
-t31 = most_unfair[k]
-t31 != 0
+t33 = n - 1
+t34 = -1
+t35 = 6
+t36 = t34 + t35
+t37 = t36 * 4
+t38 = n + t37
+t39 = t38 - 21
+t40 = array[t39]
+t41 = t40 - 10086
+stack[t33] = t41
+n = n - 1
+n != 0
 BNZ Label19
+return t-1
+test_for:
+i = 1
+Label20:
+printf string2
+i = i + 1
+0 != 0
+BNZ Label20
+return t-1
+test_6_para:
+para int a1
+para int a2
+para int a3
+para int a4
+para int a5
+para int a6
+t44 = a1 + a2
+t45 = t44 + a3
+t46 = t45 + a4
+t47 = t46 + a5
+t48 = t47 + a6
+return t48
+main:
+call  test_for;
+scanf a
+scanf b
+scanf op
+push a
+push b
+push op
+call  compute;
+t49 = RET
+n = t49
+t50 = n
+scanf m
+t51 = n
+t52 = m
+push t51
+push t52
+call  judge;
+t53 = RET
+sy = t53
+t54 = n
+t55 = m
+push a
+push b
+push t54
+push t55
+push 1
+push 2
+call  test_6_para;
+t56 = RET
+sum = t56
+t57 = sum
+printf string3
+printf string4
+call  get_permutations_sy;
+t58 = RET
+nor_sy = t58
+sy != nor_sy
+BZ Label21
 printf string5
+GOTO Label22
+Label21:
+call  preparation;
+push 0
+call  permutations;
+Label22:
 return t-1
