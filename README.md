@@ -62,25 +62,26 @@ Text segmentation and keyword extraction process, Dealing with keywords is a key
 
 For example：
 
-![1593098151415](C:\Users\wf19981020\AppData\Roaming\Typora\typora-user-images\1593098151415.png)
+![](https://img2020.cnblogs.com/blog/1346871/202007/1346871-20200708190124374-1347955770.png)
 
 ### Syntax analysis
 
 Determine whether there are grammatical errors in the text program, and analyze the function of each line of the program, for example:
 
-![1593098301428](C:\Users\wf19981020\AppData\Roaming\Typora\typora-user-images\1593098301428.png)
+![](https://img2020.cnblogs.com/blog/1346871/202007/1346871-20200708190155093-1419698383.png)
 
 ### Semantic Analysis and Generate intermediate code
 
 Analyze whether there are semantic errors in the text, and generate intermediate code according to the semantics of the program, In this step, I introduced a lot of variables, a example of this step as below:
 
-![1593125693996](E:\IMG_4252.jpg)
+![](https://img2020.cnblogs.com/blog/1346871/202007/1346871-20200708190247133-627044487.png)
 
 ### Generate MIPS assembly code
 
 Combining the computer architecture of MIPS and the virtual space, we can convert the intermediate code into assembly code of MIPS, This step is also the optimization step
 
-![1593126340862](E:\1593126340862.png)
+![](https://img2020.cnblogs.com/blog/1346871/202007/1346871-20200708190307067-1263445062.png)
 
-## 生成代码的优化步骤
+## Optimization steps for code generation
 
+The optimization steps of this experiment are mainly reflected in the use of registers and the division of code blocks, The role and benefit of code block division is to optimize the use of registers, First of all, we stipulate that the registers inside the code block are used as s0-s8 registers are variable registers, and t0-t8 are temporary registers, in a function, Consider the use of registers between code blocks as a graph, and registers as fixed-point, so that a DAG graph of the graph can be constructed. The DAG graph could lead a register using with Minimal register replacement with memory.
